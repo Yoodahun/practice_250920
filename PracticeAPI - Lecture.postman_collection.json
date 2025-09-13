@@ -1,0 +1,2410 @@
+{
+	"info": {
+		"_postman_id": "ddb8492c-ca07-4dfc-b34f-9ea89d6195f1",
+		"name": "PracticeAPI - Lecture",
+		"description": "강의용 request, collection folder들을 모아놓은 collection입니다.\n\n상세내용은 강의자료와 함께 각 폴더, 리퀘스트들의 documentation 내용을 확인해주세요.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11691534"
+	},
+	"item": [
+		{
+			"name": "1. GUI and create request",
+			"item": [],
+			"description": "## 간단한 postman GUI 둘러보기\n\n## request 생성해보기\n\n1. 폴더 내부에 \"...\" 을 클릭해서 \"add request\" 해보기\n    \n2. 아래 curl을 복사한 다음 import해서 생성해보기\n    \n\n``` shell\ncurl --location 'https://ieyeufrggnhroparziot.functions.supabase.co/api/users'\n\n ```"
+		},
+		{
+			"name": "2. Script",
+			"item": [
+				{
+					"name": "유저 조회 - 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "apiKey",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlleWV1ZnJnZ25ocm9wYXJ6aW90Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTUyMjc5NDgsImV4cCI6MjA3MDgwMzk0OH0.NPBvARfsE9Zg9w58eEUKQ5CvAltmB8KLHbwj5WWjea4",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "https://ieyeufrggnhroparziot.functions.supabase.co/api/users",
+							"protocol": "https",
+							"host": [
+								"ieyeufrggnhroparziot",
+								"functions",
+								"supabase",
+								"co"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "유저 조회 - 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// ---- Parse response ----",
+									"// 응답값을 포스트맨에서 검증하기 편한 형태로 꺼내는 작업이 반드시 필요합니다.",
+									"let body = pm.response.json();",
+									"",
+									"",
+									"// ---- TODO: 전체 데이터가 1개 이상 존재하는지 검증하는 테스트케이스를 작성해보세요.",
+									"// pm.expect(body.length).to.be.greaterThanOrEqual(1);",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// TODO : console.log() 를 이용해서 작성해보세요."
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "apiKey",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlleWV1ZnJnZ25ocm9wYXJ6aW90Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTUyMjc5NDgsImV4cCI6MjA3MDgwMzk0OH0.NPBvARfsE9Zg9w58eEUKQ5CvAltmB8KLHbwj5WWjea4",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "https://ieyeufrggnhroparziot.functions.supabase.co/api/users",
+							"protocol": "https",
+							"host": [
+								"ieyeufrggnhroparziot",
+								"functions",
+								"supabase",
+								"co"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "## Pre-script and Post-script\n\n**유저조회 - 1** request의 아래 탭에서 `console.log(\"호출\");` 를 추가하고 호출해보세요.\n\n- pre-script\n    \n- post-script\n    \n\n이후 UI하단 `Console` 탭을 열고 동작이 어떻게 실행되는지를 확인해보세요.\n\n## assertion script\n\n**유저 조회 - 2** request에서 TODO 코멘트를 보고 assertion을 수행하는 테스트 함수를 작성해봅세요."
+		},
+		{
+			"name": "3. Variable",
+			"item": [
+				{
+					"name": "유저 조회 - Environment 설정해보기",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "apiKey",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlleWV1ZnJnZ25ocm9wYXJ6aW90Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTUyMjc5NDgsImV4cCI6MjA3MDgwMzk0OH0.NPBvARfsE9Zg9w58eEUKQ5CvAltmB8KLHbwj5WWjea4",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "/api/users",
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "유저 생성 - CollectionVariable 설정",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// 0~9999 사이의 랜덤 숫자 생성",
+									"const randomNumber = Math.floor(Math.random() * 1000000);",
+									"",
+									"// 이메일 주소 생성",
+									"const randomEmail = `test${randomNumber}@test.com`;",
+									"",
+									"// TODO: 컬렉션 변수에 저장",
+									"",
+									"// TODO: 설정이 제대로 되었다면 Body 탭의 \"email\" 값의 value를 collectionsVariable값을 가져와 사용해보세요.",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "apiKey",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlleWV1ZnJnZ25ocm9wYXJ6aW90Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTUyMjc5NDgsImV4cCI6MjA3MDgwMzk0OH0.NPBvARfsE9Zg9w58eEUKQ5CvAltmB8KLHbwj5WWjea4",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    // Pre-script에서 생성한 이메일 계정을 불러와서 설정해보세요.\n    \"email\": \"\",\n    \"password\":\"test\",\n    \"nickname\":\"test\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://ieyeufrggnhroparziot.functions.supabase.co/api/users",
+							"protocol": "https",
+							"host": [
+								"ieyeufrggnhroparziot",
+								"functions",
+								"supabase",
+								"co"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "로그인하기",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var body = pm.response.json();",
+									"",
+									"",
+									"// TODO : 로그인 완료 후의 돌아오는 응답값에서 access_token과 user_id 값을 추출해서 collectionsVariable에 값을 저장해보세요.",
+									"    ",
+									"///",
+									"",
+									"",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    // TODO: email의 value값에 유저 생성 request에서 collectionsVariable로 사용했던 값을 사용해보세요.\n    \"email\":\"\",\n    \"password\":\"test\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://ieyeufrggnhroparziot.functions.supabase.co/api/auth/login",
+							"protocol": "https",
+							"host": [
+								"ieyeufrggnhroparziot",
+								"functions",
+								"supabase",
+								"co"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "## 1\\. Environment Variable\n\n- 좌측 `environments` 메뉴에서 environment를 생성하고 api의 기본 호출주소를 변수화해보기.\n    \n- 생성한 environment를 설정하고, \"유저 조회\" request에서 기본 호출주소 environment variable을 사용해보기\n    \n\n## 2\\. Collection Variable\n\n### 유저 생성\n\n\"유저 생성\" request에서 아래의 활동해보기\n\n1. 유저 생성 시 입력할 유저의 이메일에 대해서 pre-script내에서 무작위로 생성하고 그것을 collection variable에 할당해보기.\n    \n2. collection variable에 할당한 user의 email을 다시 유저 생성 시 body값에서 사용해보기.\n    \n\n### 로그인\n\n1. 로그인 시도 시에 body값에, 유저 생성 시에 만든 email 값을 collection variable로 부터 불러와, 로그인 시에 이메일을 직접 입력하지 않아도 되도록 변수화 해보기.\n    \n2. 로그인 완료 후에 응답값에서 access_token와 id값을 뽑아 collection variable값으로 만들기."
+		},
+		{
+			"name": "4. Practice",
+			"item": [
+				{
+					"name": "Users - functional",
+					"item": [
+						{
+							"name": "GET users",
+							"item": [
+								{
+									"name": "users",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"",
+													"// ---- Parse response ----",
+													"let body = pm.response.json();",
+													"",
+													"pm.test(\"Response time is less than 700ms\", function () {",
+													"    //request응답속도가 700ms 이하인지",
+													"    // pm.response.reponseTime.to.be.below(기대속도)",
+													"    ",
+													"    ",
+													"});",
+													"",
+													"",
+													"// 응답값의 내부의 특정 값이 기대하는 값과 일치하는지 확인할 때는",
+													"// pm.expect()` 를 사용합니다.",
+													"pm.test(\"데이터가 존재하는 경우, 배열 길이가 1이상 인지\", function () {",
+													"    //일단 데이터의 형태가 배열인지 확인한다.",
+													"    // to.be.an(\"array\")",
+													"    ",
+													"",
+													"    //배열의 길이가 1보다 같거나 큰지 확인한다.",
+													"    // body.length",
+													"    //greaterThanOrEqual(1)",
+													"    pm.expect(body.length).to.be.greaterThanOrEqual(1);",
+													"  ",
+													"});",
+													"",
+													"pm.test(\"데이터가 존재하는 경우, 각 필드들이 존재하는지\", function () {",
+													"    // 첫 번째 요소만을 대상으로 확인한다.",
+													"    // pm.expect(body[0])",
+													"    ",
+													"    // id가 존재하는지",
+													"    // to.have.property(key값의 이름)",
+													"    ",
+													"    // body[0].id는 문자열인지",
+													"    // to.be.an(\"string\")",
+													"",
+													"    // email이 존재하는지",
+													"",
+													"    // nickname이 존재하는지",
+													"",
+													"});"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://ieyeufrggnhroparziot.functions.supabase.co/api/users",
+											"protocol": "https",
+											"host": [
+												"ieyeufrggnhroparziot",
+												"functions",
+												"supabase",
+												"co"
+											],
+											"path": [
+												"api",
+												"users"
+											]
+										},
+										"description": "한 번 호출해보시고 구조에 따라 테스트를 작성해보세요.\n\n1. base 호출주소를 environment variable을 이용해서 재사용가능한 형태로 만들어보세요.\n    \n2. 테스트케이스를 어떤 형태로 만들고있는지 살펴보세요."
+									},
+									"response": []
+								}
+							],
+							"description": "```\nhttps://ieyeufrggnhroparziot.functions.supabase.co/api/users\n\n ```"
+						},
+						{
+							"name": "CREATE users",
+							"item": [
+								{
+									"name": "계정 생성 성공",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"body = pm.response.json();",
+													"",
+													"pm.test(\"Status code is 201\", function () {",
+													"    // 상태코드가 201인지 확인",
+													"    //to.have.status(201);",
+													"});",
+													"",
+													"",
+													"",
+													"pm.test(\"계정 생성 성공 확인\", function () {",
+													"    // is_account_created 필드가 존재하는지 확인",
+													"",
+													"    // is_account_created 필드가 boolean값인지 확인",
+													"    // to.be.a(\"boolean\")",
+													"",
+													"    // is_account_created 필드가 true인지 확인",
+													"    // to.be.true;",
+													"",
+													"",
+													"    // user_id 필드가 존재하는지 확인",
+													"    // to.have.property()",
+													"",
+													"    // user_id 필드가 string 타입인지 확인",
+													"    // to.be.a(\"string\")",
+													" ",
+													"});"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "apiKey",
+												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlleWV1ZnJnZ25ocm9wYXJ6aW90Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTUyMjc5NDgsImV4cCI6MjA3MDgwMzk0OH0.NPBvARfsE9Zg9w58eEUKQ5CvAltmB8KLHbwj5WWjea4",
+												"type": "text",
+												"disabled": true
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"email\":\"test121@test.com\",\n    \"password\":\"test\",\n    \"nickname\":\"test\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "https://ieyeufrggnhroparziot.functions.supabase.co/api/users",
+											"protocol": "https",
+											"host": [
+												"ieyeufrggnhroparziot",
+												"functions",
+												"supabase",
+												"co"
+											],
+											"path": [
+												"api",
+												"users"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "이미 존재하는 계정을 중복해서 생성하려는 경우",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"body = pm.response.json();",
+													"",
+													"pm.test(\"Status code is 400\", function () {",
+													"    pm.response.to.have.status(400);",
+													"});",
+													"",
+													"",
+													"pm.test(\"생성하고자 하는 계정이 이미 존재하는 경우의 응답값 확인\", function () {",
+													"    //\"error\" 필드 값이 존재하는지",
+													"    //to.have.property(\"error\")",
+													"  ",
+													"    // \"error\"의 응답값이 아래 메세지와 동일한지",
+													"    // A user with this email address has already been registered",
+													"    // to.be.equal()",
+													"    ",
+													"});"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "apiKey",
+												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlleWV1ZnJnZ25ocm9wYXJ6aW90Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTUyMjc5NDgsImV4cCI6MjA3MDgwMzk0OH0.NPBvARfsE9Zg9w58eEUKQ5CvAltmB8KLHbwj5WWjea4",
+												"type": "text",
+												"disabled": true
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"email\":\"test1@test.com\",\n    \"password\":\"test\",\n    \"nickname\":\"test\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "https://ieyeufrggnhroparziot.functions.supabase.co/api/users",
+											"protocol": "https",
+											"host": [
+												"ieyeufrggnhroparziot",
+												"functions",
+												"supabase",
+												"co"
+											],
+											"path": [
+												"api",
+												"users"
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"description": "```\nhttps://ieyeufrggnhroparziot.functions.supabase.co/api/users\n\n ```"
+						},
+						{
+							"name": "PATCH users",
+							"item": [
+								{
+									"name": "문자열값이 없는 경우",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"body = pm.response.json();",
+													"",
+													"pm.test(\"Status code is 400\", function () {",
+													"    pm.response.to.have.status(400);",
+													"});",
+													"",
+													"",
+													"pm.test(\"문자열값이 없는 경우\", function () {",
+													"    // error 필드가 존재하는지",
+													"  ",
+													"",
+													"    // error 필드의 값은 \"invalid_nickname\" 인지",
+													"    ",
+													"});"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{ACCESS_TOKEN}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    // TODO: 바디값을 적절히 수정해보세요.\n    // \"nickname\":\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "https://ieyeufrggnhroparziot.functions.supabase.co/api/users/{{USER_ID}}",
+											"protocol": "https",
+											"host": [
+												"ieyeufrggnhroparziot",
+												"functions",
+												"supabase",
+												"co"
+											],
+											"path": [
+												"api",
+												"users",
+												"{{USER_ID}}"
+											]
+										},
+										"description": "## endpoint\n\n```\nhttps://ieyeufrggnhroparziot.functions.supabase.co/api/users/{ID}\n\n ```\n\nbody의 \"nickname\" 값을 빈 string으로 보낼때의 테스트를 작성해보세요."
+									},
+									"response": []
+								},
+								{
+									"name": "존재하지 않는 유저에 대해 변경하려는 경우",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"body = pm.response.json();",
+													"",
+													"pm.test(\"Status code is 401\", function () {",
+													"    // 상태코드가 401인 것을 체크할 것.",
+													"});",
+													"",
+													"",
+													"pm.test(\"존재하지 않는 유저에 대해 닉네임을 변경하려고 하는 경우\", function () {",
+													"    // error 키값이 존재하는지 확인",
+													"  ",
+													"",
+													"    // error 키값의 값이 \"unauthorized\" 인지 확인할 것.",
+													"  ",
+													"});",
+													"",
+													"",
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"let deleted_access_token = \"eyJhbGciOiJIUzI1NiIsImtpZCI6ImE5T0FNQjNZTVZoVmZTcmEiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2lleWV1ZnJnZ25ocm9wYXJ6aW90LnN1cGFiYXNlLmNvL2F1dGgvdjEiLCJzdWIiOiI4ZmRlMTljYy04NmI0LTQ4MDQtYmM4Yy02OWRhNTY5NzA4ZDUiLCJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzU2NDUyNjg5LCJpYXQiOjE3NTY0NDkwODksImVtYWlsIjoidGVzdF9kZWxldGVAdGVzdC5jb20iLCJwaG9uZSI6IiIsImFwcF9tZXRhZGF0YSI6eyJwcm92aWRlciI6ImVtYWlsIiwicHJvdmlkZXJzIjpbImVtYWlsIl19LCJ1c2VyX21ldGFkYXRhIjp7ImRpc3BsYXlfbmFtZSI6InRlc3QiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZX0sInJvbGUiOiJhdXRoZW50aWNhdGVkIiwiYWFsIjoiYWFsMSIsImFtciI6W3sibWV0aG9kIjoicGFzc3dvcmQiLCJ0aW1lc3RhbXAiOjE3NTY0NDkwODl9XSwic2Vzc2lvbl9pZCI6IjNkM2IyMTBmLTFlYjItNGE4NC1hYTJkLTU2NzY5YWRmNjAzZCIsImlzX2Fub255bW91cyI6ZmFsc2V9.zSt2xmpVYlF51pBBjARmA7AMbzabe_YyGmM1hjSDLSs\";",
+													"",
+													"let deleted_user_id = \"86b41223-7e4d-427c-b0c9-342252238325\";",
+													"",
+													"pm.collectionVariables.set(\"DELETED_ACCESS_TOKEN\", deleted_access_token);",
+													"pm.collectionVariables.set(\"DELETED_USER_ID\", deleted_user_id);"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{DELETED_ACCESS_TOKEN}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"nickname\":\"testtest\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "https://ieyeufrggnhroparziot.functions.supabase.co/api/users/{{DELETED_USER_ID}}",
+											"protocol": "https",
+											"host": [
+												"ieyeufrggnhroparziot",
+												"functions",
+												"supabase",
+												"co"
+											],
+											"path": [
+												"api",
+												"users",
+												"{{DELETED_USER_ID}}"
+											]
+										},
+										"description": "## endpoint\n\n```\nhttps://ieyeufrggnhroparziot.functions.supabase.co/api/users/{ID}\n\n ```\n\nbody의 \"nickname\" 값을 빈 string으로 보낼때의 테스트를 작성해보세요."
+									},
+									"response": []
+								},
+								{
+									"name": "스페이스 공백값인 경우",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"body = pm.response.json();",
+													"",
+													"pm.test(\"Status code is 400\", function () {",
+													"    pm.response.to.have.status(400);",
+													"});",
+													"",
+													"",
+													"pm.test(\"문자열값이 없는 경우\", function () {",
+													"  pm.expect(body).to.have.property(\"error\");",
+													"  pm.expect(body.error).to.be.equal(\"invalid_nickname\");",
+													"});"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"// 로그인 요청 보내기",
+													"",
+													"let user_email = \"test1@test.com\";",
+													"let password = \"test\"",
+													"",
+													"pm.sendRequest({",
+													"    url: \"https://ieyeufrggnhroparziot.functions.supabase.co/api/auth/login\",",
+													"    method: \"POST\",",
+													"    header: {",
+													"        \"Content-Type\": \"application/json\"",
+													"    },",
+													"    body: {",
+													"        mode: \"raw\",",
+													"        raw: JSON.stringify({",
+													"            email: user_email,",
+													"            password: password",
+													"        })",
+													"    }",
+													"}, function (err, response) {",
+													"    if (err) {",
+													"        console.log(\"Login error:\", err);",
+													"        return;",
+													"    }",
+													"    ",
+													"    const body = response.json();",
+													"    if (body && body.access_token) {",
+													"        // TODO: collectionVariable에 아래 값을 저장해보세요.",
+													"        // body.access_token -> ACCESS_TOKEN",
+													"        // body.id -> USER_ID",
+													"        ",
+													"    } else {",
+													"        console.log(\"Login response did not include accessToken:\", body);",
+													"    }",
+													"});"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{ACCESS_TOKEN}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    // TODO: 바디값을 적절히 수정해보세요.\n    // \"nickname\":\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "https://ieyeufrggnhroparziot.functions.supabase.co/api/users/{{USER_ID}}",
+											"protocol": "https",
+											"host": [
+												"ieyeufrggnhroparziot",
+												"functions",
+												"supabase",
+												"co"
+											],
+											"path": [
+												"api",
+												"users",
+												"{{USER_ID}}"
+											]
+										},
+										"description": "## endpoint\n\n```\nhttps://ieyeufrggnhroparziot.functions.supabase.co/api/users/{ID}\n\n ```\n\nbody의 \"nickname\" 필드의 값을 공백으로 보냈을 때의 테스트를 작성해보세요."
+									},
+									"response": []
+								},
+								{
+									"name": "정상적으로 변경되는 경우",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"body = pm.response.json();",
+													"",
+													"pm.test(\"Status code is 200\", function () {",
+													"    // 상태코드가 200인 것을 확인하기",
+													"    // to.have.status()",
+													"    ",
+													"});",
+													"",
+													"",
+													"pm.test(\"is_nickname_updated 값이 true인지 확인\", function () {",
+													"    // is_nickname_updated key값이 존재하는지",
+													"    // to.have.property(\"\")",
+													"",
+													"    // is_nickname_updated의 값이 boolean인지",
+													"    // to.be.an(\"boolean\")",
+													"",
+													"    // is_nickname_updated 값이 true 인지",
+													"  ",
+													"});"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"// 로그인 요청 보내기",
+													"",
+													"let user_email = \"test1@test.com\";",
+													"let password = \"test\"",
+													"",
+													"pm.sendRequest({",
+													"    url: \"https://ieyeufrggnhroparziot.functions.supabase.co/api/auth/login\",",
+													"    method: \"POST\",",
+													"    header: {",
+													"        \"Content-Type\": \"application/json\"",
+													"    },",
+													"    body: {",
+													"        mode: \"raw\",",
+													"        raw: JSON.stringify({",
+													"            email: user_email,",
+													"            password: password",
+													"        })",
+													"    }",
+													"}, function (err, response) {",
+													"    if (err) {",
+													"        console.log(\"Login error:\", err);",
+													"        return;",
+													"    }",
+													"    ",
+													"    const body = response.json();",
+													"    if (body && body.access_token) {",
+													"        // 환경 변수에 저장",
+													"        pm.collectionVariables.set(\"ACCESS_TOKEN\", body.access_token);",
+													"        pm.collectionVariables.set(\"USER_ID\", body.user_id);",
+													"        console.log(\"accessToken set:\", body.access_token);",
+													"    } else {",
+													"        console.log(\"Login response did not include accessToken:\", body);",
+													"    }",
+													"});"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{ACCESS_TOKEN}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"nickname\":\"updated_nickname\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "https://ieyeufrggnhroparziot.functions.supabase.co/api/users/{{USER_ID}}",
+											"protocol": "https",
+											"host": [
+												"ieyeufrggnhroparziot",
+												"functions",
+												"supabase",
+												"co"
+											],
+											"path": [
+												"api",
+												"users",
+												"{{USER_ID}}"
+											]
+										},
+										"description": "## endpoint\n\n```\nhttps://ieyeufrggnhroparziot.functions.supabase.co/api/users/{ID}\n\n ```\n\nbody의 \"nickname\" 필드의 값을 공백으로 보냈을 때의 테스트를 작성해보세요."
+									},
+									"response": []
+								}
+							],
+							"description": "```\nhttps://ieyeufrggnhroparziot.functions.supabase.co/api/users/{ID}\n\n ```"
+						},
+						{
+							"name": "\bDELETE users/me",
+							"item": [
+								{
+									"name": "정상적으로 삭제된 경우",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"body = pm.response.json();",
+													"",
+													"pm.test(\"Status code is 200\", function () {",
+													"    ",
+													"});",
+													"",
+													"",
+													"pm.test(\"정상적으로 삭제된 경우 - 응답값 구성 확인\", function () {",
+													"    // is_user_deleted 필드가 존재하는지",
+													"    ",
+													"    // is_user_deleted 필드의 type은 boolean인지",
+													"    ",
+													"    ",
+													"    // user 필드가 존재하는지",
+													"    ",
+													"    // user 필드의 type은 object인지 (밸류값으로 다시 키와 밸류형태로 존재)",
+													"    ",
+													"",
+													"    // user 하위에 id 필드가 존재하는지",
+													"    ",
+													"    // user 하위에 email 필드가 존재하는지",
+													"    ",
+													"    // user 하위에 nickname 필드가 존재하는지",
+													"    ",
+													"",
+													"",
+													"});",
+													"",
+													"pm.test(\"삭제 하고자하는 유저와 삭제된 유저의 아이디가 일치하는 지 여부 확인\", function(){",
+													"    // 삭제한 유저의 id값을 collectionVariable로 부터 가져온다.",
+													"    ",
+													"",
+													"    // user.id의 값이 collectionVariable로 부터 가져온 값과 일치하는지 ",
+													"    // (즉 토큰발급받을 때의 계정과 삭제한 계정의 id가 일치하는지.)",
+													"    ",
+													"});",
+													"",
+													"// run은 기본적으로 순차실행입니다.",
+													"// 다음 request에서 이미 삭제된 유저를 한 번 더 삭제를 시도하므로, 본 request에서 사용한 제거된 유저의 엑세스토큰을 별도의 컬렉션 변수로 설정합니다.",
+													"let deleted_access_token = pm.collectionVariables.get(\"ACCESS_TOKEN\");",
+													"pm.collectionVariables.set(\"DELETED_ACCESS_TOKEN\", deleted_access_token);"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{ACCESS_TOKEN}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "DELETE",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "https://ieyeufrggnhroparziot.functions.supabase.co/api/users/me",
+											"protocol": "https",
+											"host": [
+												"ieyeufrggnhroparziot",
+												"functions",
+												"supabase",
+												"co"
+											],
+											"path": [
+												"api",
+												"users",
+												"me"
+											]
+										},
+										"description": "유저가 정상적으로 삭제될때의 케이스를 작성해보세요."
+									},
+									"response": []
+								},
+								{
+									"name": "존재하지않는 유저를 삭제하려고할 때",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"body = pm.response.json();",
+													"",
+													"pm.test(\"Status code is 401\", function () {",
+													"    // 상태코드가 401인 것을 체크할 것.",
+													"});",
+													"",
+													"",
+													"pm.test(\"존재하지 않는 유저를 삭제하고자하는 경우\", function () {",
+													"    // error 키값이 존재하는지 확인",
+													"  ",
+													"",
+													"    // error 키값의 값이 \"unauthorized\" 인지 확인할 것.",
+													"  ",
+													"});",
+													"",
+													"",
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{DELETED_ACCESS_TOKEN}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "DELETE",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "https://ieyeufrggnhroparziot.functions.supabase.co/api/users/me",
+											"protocol": "https",
+											"host": [
+												"ieyeufrggnhroparziot",
+												"functions",
+												"supabase",
+												"co"
+											],
+											"path": [
+												"api",
+												"users",
+												"me"
+											]
+										},
+										"description": "존재하지 않는 유저를 삭제하려고 하는 경우의 테스트케이스를 작성해보세요."
+									},
+									"response": []
+								}
+							],
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"packages": {},
+										"exec": [
+											"// 로그인 요청 보내기",
+											"",
+											"let user_email = \"test_delete@test.com\";",
+											"let password = \"test\"",
+											"",
+											"console.log(\"folder level pre script was executed -------\")",
+											"// create account ------------------------",
+											"pm.sendRequest({",
+											"    url: \"https://ieyeufrggnhroparziot.functions.supabase.co/api/users\",",
+											"    method: \"POST\",",
+											"    header: {",
+											"        \"Content-Type\": \"application/json\"",
+											"    },",
+											"    body: {",
+											"        mode: \"raw\",",
+											"        raw: JSON.stringify({",
+											"            email: user_email,",
+											"            password: password,",
+											"            nickname: \"test\"",
+											"        })",
+											"    }",
+											"}, function (err, res) {",
+											"    if (err) {",
+											"        console.error(\"User create error:\", err);",
+											"        return;",
+											"    }",
+											"});",
+											"",
+											"",
+											"",
+											"",
+											"// get access token ------------------------",
+											"pm.sendRequest({",
+											"    url: \"https://ieyeufrggnhroparziot.functions.supabase.co/api/auth/login\",",
+											"    method: \"POST\",",
+											"    header: {",
+											"        \"Content-Type\": \"application/json\"",
+											"    },",
+											"    body: {",
+											"        mode: \"raw\",",
+											"        raw: JSON.stringify({",
+											"            email: user_email,",
+											"            password: password",
+											"        })",
+											"    }",
+											"}, function (err, response) {",
+											"    if (err) {",
+											"        console.log(\"Login error:\", err);",
+											"        return;",
+											"    }",
+											"    ",
+											"    const body = response.json();",
+											"    if (body && body.access_token) {",
+											"        // 환경 변수에 저장",
+											"        pm.collectionVariables.set(\"ACCESS_TOKEN\", body.access_token);",
+											"        pm.collectionVariables.set(\"USER_ID\", body.id);",
+											"        console.log(\"accessToken set:\", body.access_token);",
+											"    } else {",
+											"        console.log(\"Login response did not include accessToken:\", body);",
+											"    }",
+											"});"
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"packages": {},
+										"exec": [
+											""
+										]
+									}
+								}
+							]
+						},
+						{
+							"name": "실습용 로그인",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();",
+											"",
+											"",
+											"pm.test(\"check status code and get access_token\", function () {",
+											"    ",
+											"    pm.response.to.have.status(200);",
+											"",
+											"    pm.collectionVariables.set(\"ACCESS_TOKEN\", jsonData.access_token);",
+											"    pm.collectionVariables.set(\"USER_ID\", jsonData.user_id);",
+											"",
+											"});",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    // 로그인하기 원하는 이메일과 비밀번호를 입력하세요.\n    \"email\":\"test1@test.com\",\n    \"password\":\"test\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://ieyeufrggnhroparziot.functions.supabase.co/api/auth/login",
+									"protocol": "https",
+									"host": [
+										"ieyeufrggnhroparziot",
+										"functions",
+										"supabase",
+										"co"
+									],
+									"path": [
+										"api",
+										"auth",
+										"login"
+									]
+								},
+								"description": "실습용 로그인 엔드포인트입니다.\n\n바디값에 로그인하고자하는 이메일과 비밀번호를 넣고 실행해주세요.\n\npost-script에는 user_id와 access_token을 컬렉션 변수로 저장하는 로직이 포함되어 있습니다."
+							},
+							"response": []
+						}
+					],
+					"description": "`/user` 엔드포인트에 대한 기능테스트 모음 폴더 입니다."
+				},
+				{
+					"name": "Users - CRUD",
+					"item": [
+						{
+							"name": "1. 계정 생성 및 유저 아이디 저장",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"// 0~9999 사이의 랜덤 숫자 생성",
+											"const randomNumber = Math.floor(Math.random() * 1000000);",
+											"",
+											"// 이메일 주소 생성",
+											"const randomEmail = `test${randomNumber}@test.com`;",
+											"",
+											"// TODO: 만든 이메일 주소를 컬렉션 변수로 저장. 이름은 편한대로 생성하기.",
+											"// console.log()를 이용해서 한 번 출력해보세요.",
+											"",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"body = pm.response.json();",
+											"",
+											"pm.test(\"Status code is 201\", function () {",
+											"    // 상태코드가 201인지 확인",
+											"    //to.have.status(201);",
+											"});",
+											"",
+											"",
+											"",
+											"pm.test(\"계정 생성 성공 확인\", function () {",
+											"    // is_account_created 필드가 존재하는지 확인",
+											"",
+											"    // is_account_created 필드가 boolean값인지 확인",
+											"    // to.be.a(\"boolean\")",
+											"",
+											"    // is_account_created 필드가 true인지 확인",
+											"",
+											"    // user_id 필드가 존재하는지 확인",
+											"",
+											"    // user_id 필드가 string 타입인지 확인",
+											"",
+											"    // user_id를 collectionVariable에 저장하기",
+											"    ",
+											" ",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "apiKey",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlleWV1ZnJnZ25ocm9wYXJ6aW90Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTUyMjc5NDgsImV4cCI6MjA3MDgwMzk0OH0.NPBvARfsE9Zg9w58eEUKQ5CvAltmB8KLHbwj5WWjea4",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\":\"{{randomEmail}}\",\n    \"password\":\"test\",\n    \"nickname\":\"test\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://ieyeufrggnhroparziot.functions.supabase.co/api/users",
+									"protocol": "https",
+									"host": [
+										"ieyeufrggnhroparziot",
+										"functions",
+										"supabase",
+										"co"
+									],
+									"path": [
+										"api",
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "2. 생성한 유저 존재여부 확인",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// ==== Config (set as variables in Postman) ====",
+											"const targetUserId = pm.collectionVariables.get(\"USER_ID\");              // 예: \"6dc3cfdf-1410-43fb-848b-825c419a78fe\"",
+											"",
+											"",
+											"// ---- Parse response ----",
+											"let body = pm.response.json();",
+											"",
+											"",
+											"pm.test(\"Response is an array\", function () {",
+											"    //to.be.an();",
+											"",
+											"});",
+											"",
+											"// ---- Find user by id ----",
+											"function findUserById(users, id) {",
+											"    for (var i = 0; i < users.length; i++) {",
+											"        if (users[i] && users[i].id === id) {",
+											"            return users[i];",
+											"        }",
+											"    }",
+											"    return null;",
+											"}",
+											"",
+											"var user = findUserById(body, targetUserId);",
+											"",
+											"pm.test(`\"${targetUserId}\" 유저 존재여부 확인`, function () {",
+											"",
+											"    // user 객체타입이 object인지 확인 an(\"object\");",
+											"    ",
+											"    // user 객체가 email key를 가지고 있는지 확인",
+											"    ",
+											"    // user 객체가 nickname key를 가지고 있는지 확인",
+											"    ",
+											"    // colelctionVariable로 부터 생성했을때 사용한 이메일 값을 가져오기.",
+											"    ",
+											"    //email이 신규유저 생성 시에 사용한 email과 동일한지 확인",
+											"    ",
+											"",
+											"});",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "apiKey",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlleWV1ZnJnZ25ocm9wYXJ6aW90Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTUyMjc5NDgsImV4cCI6MjA3MDgwMzk0OH0.NPBvARfsE9Zg9w58eEUKQ5CvAltmB8KLHbwj5WWjea4",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "https://ieyeufrggnhroparziot.functions.supabase.co/api/users",
+									"protocol": "https",
+									"host": [
+										"ieyeufrggnhroparziot",
+										"functions",
+										"supabase",
+										"co"
+									],
+									"path": [
+										"api",
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "3. 닉네임 변경",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"// 로그인 요청 보내기",
+											"",
+											"let user_email = pm.collectionVariables.get(\"randomEmail\");",
+											"let password = \"test\"",
+											"",
+											"pm.sendRequest({",
+											"    url: \"https://ieyeufrggnhroparziot.functions.supabase.co/api/auth/login\",",
+											"    method: \"POST\",",
+											"    header: {",
+											"        \"Content-Type\": \"application/json\"",
+											"    },",
+											"    body: {",
+											"        mode: \"raw\",",
+											"        raw: JSON.stringify({",
+											"            email: user_email,",
+											"            password: password",
+											"        })",
+											"    }",
+											"}, function (err, response) {",
+											"    if (err) {",
+											"        console.log(\"Login error:\", err);",
+											"        return;",
+											"    }",
+											"    ",
+											"    const body = response.json();",
+											"    if (body && body.access_token) {",
+											"        // 환경 변수에 저장",
+											"        pm.collectionVariables.set(\"ACCESS_TOKEN\", body.access_token);",
+											"        pm.collectionVariables.set(\"USER_ID\", body.user_id);",
+											"        console.log(\"accessToken set:\", body.access_token);",
+											"    } else {",
+											"        console.log(\"Login response did not include accessToken:\", body);",
+											"    }",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"body = pm.response.json();",
+											"",
+											"pm.test(\"Status code is 200\", function () {",
+											"    // 상태코드가 200인 것을 확인하기",
+											"    // to.have.status()",
+											"    ",
+											"});",
+											"",
+											"",
+											"pm.test(\"is_nickname_updated 값이 true인지 확인\", function () {",
+											"    // is_nickname_updated key값이 존재하는지",
+											"",
+											"    // is_nickname_updated의 값이 boolean인지",
+											"",
+											"    // is_nickname_updated 값이 true 인지",
+											"  ",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{ACCESS_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nickname\":\"dahun_test\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://ieyeufrggnhroparziot.functions.supabase.co/api/users/{{USER_ID}}",
+									"protocol": "https",
+									"host": [
+										"ieyeufrggnhroparziot",
+										"functions",
+										"supabase",
+										"co"
+									],
+									"path": [
+										"api",
+										"users",
+										"{{USER_ID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "4. 변경한 닉네임이 잘 저장되었는지",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// ==== Config (set as variables in Postman) ====",
+											"// 변경한 닉네임이 잘 저장되었는지 확인하기 위해, 저장한 user_id값을 collection variable로 부터 읽어온다.",
+											"const targetUserId = pm.collectionVariables.get(\"USER_ID\");              // 예: \"6dc3cfdf-1410-43fb-848b-825c419a78fe\"",
+											"",
+											"",
+											"// ---- Parse response ----",
+											"let body = pm.response.json();",
+											"",
+											"",
+											"pm.test(\"Response is an array\", function () {",
+											"    //to.be.an();",
+											"",
+											"});",
+											"// ---- Find user by id ----",
+											"function findUserById(users, id) {",
+											"    for (var i = 0; i < users.length; i++) {",
+											"        if (users[i] && users[i].id === id) {",
+											"            return users[i];",
+											"        }",
+											"    }",
+											"    return null;",
+											"}",
+											"",
+											"var user = findUserById(body, targetUserId);",
+											"",
+											"pm.test(`\"${targetUserId}\" 유저 존재여부 확인`, function () {",
+											"",
+											"    // user 객체타입이 object인지 확인 an(\"object\");",
+											"    ",
+											"    // user 객체가 email key를 가지고 있는지 확인",
+											"    ",
+											"    // user 객체가 nickname key를 가지고 있는지 확인",
+											"    ",
+											"",
+											"    // collectionVariable로 부터 이메일값을 가져온다.",
+											"    let user_email = pm.collectionVariables.get(\"randomEmail\");",
+											"    //email이 신규유저 생성 시에 사용한 email과 동일한지 확인",
+											"    ",
+											"",
+											"});",
+											"",
+											"pm.test(\"변경한 닉네임이 잘 저장되었는지 확인\", function () {",
+											"",
+											"    //변경했던 이메일을과 user.nickname이 일치하는지를 확인",
+											"    ",
+											"",
+											"});",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://ieyeufrggnhroparziot.functions.supabase.co/api/users",
+									"protocol": "https",
+									"host": [
+										"ieyeufrggnhroparziot",
+										"functions",
+										"supabase",
+										"co"
+									],
+									"path": [
+										"api",
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "5. 유저 삭제",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"body = pm.response.json();",
+											"",
+											"pm.test(\"Status code is 200\", function () {",
+											"    ",
+											"});",
+											"",
+											"",
+											"pm.test(\"정상적으로 삭제된 것을 확인\", function () {",
+											"    // is_user_deleted 필드가 존재하는지",
+											"    ",
+											"    // is_user_deleted 필드의 type은 boolean인지 a(\"boolean\");",
+											"    ",
+											"    // user 필드가 존재하는지",
+											"    ",
+											"    // user 필드의 type은 object인지 (밸류값으로 다시 키와 밸류형태로 존재) a(\"object\");",
+											"    ",
+											"    ",
+											"    // user 하위에 id 필드가 존재하는지",
+											"    ",
+											"    // user 하위에 email 필드가 존재하는지",
+											"    ",
+											"    // user 하위에 nickname 필드가 존재하는지",
+											"    ",
+											"",
+											"});",
+											"",
+											"pm.test(\"삭제 하고자하는 유저와 삭제된 유저의 아이디가 일치하는 지 여부 확인\", function(){",
+											"    // 삭제한 유저의 id값을 collectionVariable로 부터 가져온다.",
+											"    ",
+											"",
+											"    // user.id의 값이 collectionVariable로 부터 가져온 값과 일치하는지 ",
+											"    // (즉 토큰발급받을 때의 계정과 삭제한 계정의 id가 일치하는지.)",
+											"    ",
+											"    ",
+											"    ",
+											"});",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{ACCESS_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://ieyeufrggnhroparziot.functions.supabase.co/api/users/me",
+									"protocol": "https",
+									"host": [
+										"ieyeufrggnhroparziot",
+										"functions",
+										"supabase",
+										"co"
+									],
+									"path": [
+										"api",
+										"users",
+										"me"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "6. 잘 삭제되었는지 확인",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const targetUserId = pm.collectionVariables.get(\"USER_ID\");    ",
+											"// ---- Parse response ----",
+											"let body = pm.response.json();",
+											"",
+											"// ---- Find user by id ----",
+											"function findUserById(users, id) {",
+											"    for (var i = 0; i < users.length; i++) {",
+											"        if (users[i] && users[i].id === id) {",
+											"            return users[i];",
+											"        }",
+											"    }",
+											"    return null;",
+											"}",
+											"",
+											"var user = findUserById(body, targetUserId);",
+											"",
+											"pm.test(`\"${targetUserId}\" 유저가 존재하지 않는 것을 확인`, function () {",
+											"    //null 체크",
+											"    ",
+											"",
+											"});",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://ieyeufrggnhroparziot.functions.supabase.co/api/users",
+									"protocol": "https",
+									"host": [
+										"ieyeufrggnhroparziot",
+										"functions",
+										"supabase",
+										"co"
+									],
+									"path": [
+										"api",
+										"users"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			],
+			"description": "실습용 리퀘스트들이 모아져있는 폴더입니다.\n\n- 기능 테스트\n    \n- CRUD 유저 플로우"
+		},
+		{
+			"name": "5. Homework",
+			"item": [
+				{
+					"name": "Post - CRUD",
+					"item": [
+						{
+							"name": "posts",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "apiKey",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlleWV1ZnJnZ25ocm9wYXJ6aW90Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTUyMjc5NDgsImV4cCI6MjA3MDgwMzk0OH0.NPBvARfsE9Zg9w58eEUKQ5CvAltmB8KLHbwj5WWjea4",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "https://ieyeufrggnhroparziot.functions.supabase.co/api/posts",
+									"protocol": "https",
+									"host": [
+										"ieyeufrggnhroparziot",
+										"functions",
+										"supabase",
+										"co"
+									],
+									"path": [
+										"api",
+										"posts"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "posts/{id}",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{ACCESS_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "apiKey",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlleWV1ZnJnZ25ocm9wYXJ6aW90Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTUyMjc5NDgsImV4cCI6MjA3MDgwMzk0OH0.NPBvARfsE9Zg9w58eEUKQ5CvAltmB8KLHbwj5WWjea4",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "https://ieyeufrggnhroparziot.functions.supabase.co/api/posts/6",
+									"protocol": "https",
+									"host": [
+										"ieyeufrggnhroparziot",
+										"functions",
+										"supabase",
+										"co"
+									],
+									"path": [
+										"api",
+										"posts",
+										"6"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "posts",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();",
+											"",
+											"",
+											"pm.test(\"check status code and post id\", function () {",
+											"    ",
+											"    pm.response.to.have.status(201);",
+											"",
+											"    pm.collectionVariables.set(\"POST_ID\", jsonData.id);",
+											"",
+											"});",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{ACCESS_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "apiKey",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlleWV1ZnJnZ25ocm9wYXJ6aW90Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTUyMjc5NDgsImV4cCI6MjA3MDgwMzk0OH0.NPBvARfsE9Zg9w58eEUKQ5CvAltmB8KLHbwj5WWjea4",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"title\": \"test title\",\n    \"body\":\"test body\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://ieyeufrggnhroparziot.functions.supabase.co/api/posts",
+									"protocol": "https",
+									"host": [
+										"ieyeufrggnhroparziot",
+										"functions",
+										"supabase",
+										"co"
+									],
+									"path": [
+										"api",
+										"posts"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "posts/{id}",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{ACCESS_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "apiKey",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlleWV1ZnJnZ25ocm9wYXJ6aW90Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTUyMjc5NDgsImV4cCI6MjA3MDgwMzk0OH0.NPBvARfsE9Zg9w58eEUKQ5CvAltmB8KLHbwj5WWjea4",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"title\": \"test title22\",\n    \"body\":\"test body and check comment\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://ieyeufrggnhroparziot.functions.supabase.co/api/posts/4",
+									"protocol": "https",
+									"host": [
+										"ieyeufrggnhroparziot",
+										"functions",
+										"supabase",
+										"co"
+									],
+									"path": [
+										"api",
+										"posts",
+										"4"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "posts",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{ACCESS_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "apiKey",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlleWV1ZnJnZ25ocm9wYXJ6aW90Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTUyMjc5NDgsImV4cCI6MjA3MDgwMzk0OH0.NPBvARfsE9Zg9w58eEUKQ5CvAltmB8KLHbwj5WWjea4",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"title\": \"test title\",\n    \"body\":\"test body\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://ieyeufrggnhroparziot.functions.supabase.co/api/posts/2",
+									"protocol": "https",
+									"host": [
+										"ieyeufrggnhroparziot",
+										"functions",
+										"supabase",
+										"co"
+									],
+									"path": [
+										"api",
+										"posts",
+										"2"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "**Post 생성 가능**\n\n- 로그인한 사용자만 생성 가능\n    \n- 액세스 토큰을 헤더에 넣어 request를 실행한다.\n    \n- 생성 시에 body에 \btitle과 body 내용을 입력할 수 있어야한다.\n    \n    - 제목과 본문은 각각 5자 이상 입력해야한다.\n        \n- 생성이 완료되면 포스트 아이디, 제목, 본문, 작성한 유저 아이디를 리턴해야한다.\n    \n\n**Post 조회 가능**\n\n- 누구나 모든 게시글 조회 가능 (공개/ 전체 읽기)\n    \n    - 포스트를 여러개 조회할 때는 포스트 아이디, 포스트를 작성한 유저 아이디, 제목, 코멘트 갯수 를 알 수 있어야한다.\n        \n- 포스트를 단 하나만 조회할 수 도 있다. (공개 / 단일 읽기)\n    \n    - 포스트를 단 하나만 조회할 때는 포스트 아이디, 포스트를 작성한 유저 아이디, 제목, 본문, 코멘트 갯수, 코멘트 내용들을 알 수 있어야한다.\n        \n\n**Post 수정 가능**\n\n- 작성자 본인만 수정 가능\n    \n    - 제목과 본문을 수정할 수 있어야한다.\n        \n    - 수정 시에도 제목과 본문은 각각 5자 이상 입력해야한다.\n        \n- 작성자가 아닌 유저가 수정하려고 하면 수정할 수 없다는 내용을 알 수 있는 값이 리턴되어야한다.\n    \n\n**Post 삭제 가능**\n\n- 작성자 본인만 삭제 가능\n    \n    - 작성자가 아닌 유저가 삭제하려고 하면 삭제할 수 없다는 내용을 알 수 있는 값이 리턴되어야한다.\n        \n- Post를 삭제하면 Post와 연결된 comment들이 자동으로 삭제되어야한다.\n    \n\n---\n\n- **포스트 생성**: POST .../api/posts (token) { title, body }\n    \n- **포스트 목록**: GET .../api/posts\n    \n- **포스트 상세**: GET .../api/posts/{id} (댓글 포함)\n    \n- **포스트 수정**: PATCH .../api/posts/{id} (token)\n    \n- **포스트 삭제**: DELETE .../api/posts/{id} (token)"
+				},
+				{
+					"name": "Comment - CRUD",
+					"item": [
+						{
+							"name": "comments?post_id",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "apiKey",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlleWV1ZnJnZ25ocm9wYXJ6aW90Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTUyMjc5NDgsImV4cCI6MjA3MDgwMzk0OH0.NPBvARfsE9Zg9w58eEUKQ5CvAltmB8KLHbwj5WWjea4",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "https://ieyeufrggnhroparziot.functions.supabase.co/api/comments?post_id=6",
+									"protocol": "https",
+									"host": [
+										"ieyeufrggnhroparziot",
+										"functions",
+										"supabase",
+										"co"
+									],
+									"path": [
+										"api",
+										"comments"
+									],
+									"query": [
+										{
+											"key": "post_id",
+											"value": "6"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "comments",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{ACCESS_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "apiKey",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlleWV1ZnJnZ25ocm9wYXJ6aW90Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTUyMjc5NDgsImV4cCI6MjA3MDgwMzk0OH0.NPBvARfsE9Zg9w58eEUKQ5CvAltmB8KLHbwj5WWjea4",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"post_id\":6,\n    \"body\":\"test comment other user\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://ieyeufrggnhroparziot.functions.supabase.co/api/comments",
+									"protocol": "https",
+									"host": [
+										"ieyeufrggnhroparziot",
+										"functions",
+										"supabase",
+										"co"
+									],
+									"path": [
+										"api",
+										"comments"
+									],
+									"query": [
+										{
+											"key": "post_id",
+											"value": "4",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "comments",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{ACCESS_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "apiKey",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlleWV1ZnJnZ25ocm9wYXJ6aW90Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTUyMjc5NDgsImV4cCI6MjA3MDgwMzk0OH0.NPBvARfsE9Zg9w58eEUKQ5CvAltmB8KLHbwj5WWjea4",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"body\":\"test comment update update\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://ieyeufrggnhroparziot.functions.supabase.co/api/comments/3",
+									"protocol": "https",
+									"host": [
+										"ieyeufrggnhroparziot",
+										"functions",
+										"supabase",
+										"co"
+									],
+									"path": [
+										"api",
+										"comments",
+										"3"
+									],
+									"query": [
+										{
+											"key": "post_id",
+											"value": "4",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "comments",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{ACCESS_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "apiKey",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlleWV1ZnJnZ25ocm9wYXJ6aW90Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTUyMjc5NDgsImV4cCI6MjA3MDgwMzk0OH0.NPBvARfsE9Zg9w58eEUKQ5CvAltmB8KLHbwj5WWjea4",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "https://ieyeufrggnhroparziot.functions.supabase.co/api/comments/3",
+									"protocol": "https",
+									"host": [
+										"ieyeufrggnhroparziot",
+										"functions",
+										"supabase",
+										"co"
+									],
+									"path": [
+										"api",
+										"comments",
+										"3"
+									],
+									"query": [
+										{
+											"key": "post_id",
+											"value": "4",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "**Comment 생성 가능**\n\n- 로그인한 사용자만 생성 가능\n    \n- comment 생성 시에는 포스트의 아이디(post_id), 코멘트 내용(body)을 입력해야한다.\n    \n    - 생성 완료시에는 코멘트 아이디, 코멘트 작성자 유저 아이디, 코멘트 내용을 리턴해야한다.\n        \n    - comment 생성 시에는 3자 이상 100자 이하 텍스트만 가능해야한다.\n        \n\n**Comment 조회 가능**\n\n- 누구나 모든 댓글 조회 가능 (공개 읽기)\n    \n- 코멘트는 특정 포스트의 코멘트만 조회할 수 있다.\n    \n- 조회 시에는 api의 쿼리파라미터로 조회하고자하는 포스트의 아이디를 넣어야한다.\n    \n- 특정 포스트의 comment 조회시에는 한 번에 여러 comment를 조회할 수 있다.\n    \n    - 포스트 아이디, 코멘트 아이디, 코멘트를 작성한 유저 아이디, 코멘트 내용을 리턴해야한다.\n        \n\n**Comment 수정 가능**\n\n- 작성자 \"본인\" 만 수정 가능\n    \n    - 수정할 때도 3자 이상 100자 이하 텍스트만 가능해야한다.\n        \n- 작성자가 아닌 사람이 수정하려고 하면 수정할 수 없다는 내용을 알 수 있는 값을 리턴해야한다.\n    \n\n**Comment 삭제 가능**\n\n- 작성자 \"본인\" 만 삭제 가능\n    \n    - 작성자가 아닌 사람이 삭제하려고 하면 삭제할 수 없다는 내용을 알 수 있는 값을 리턴해야한다.\n        \n\n---\n\n- **댓글 생성**: POST .../api/comments (token) { post_id :int, body:string }\n    \n- **댓글 조회**: GET .../api/comments?post_id={post_id}\n    \n- **댓글 수정**: PATCH .../api/comments/{comment_id} (token)\n    \n- **댓글 삭제**: DELETE .../api/comments/{comment_id} (token)"
+				},
+				{
+					"name": "/auth/login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"",
+									"",
+									"pm.test(\"check status code and get access_token\", function () {",
+									"    ",
+									"    pm.response.to.have.status(200);",
+									"",
+									"    pm.collectionVariables.set(\"ACCESS_TOKEN\", jsonData.access_token);",
+									"    pm.collectionVariables.set(\"USER_ID\", jsonData.user_id);",
+									"",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    // 로그인하기 원하는 이메일과 비밀번호를 입력하세요.\n    \"email\":\"test1@test.com\",\n    \"password\":\"test\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://ieyeufrggnhroparziot.functions.supabase.co/api/auth/login",
+							"protocol": "https",
+							"host": [
+								"ieyeufrggnhroparziot",
+								"functions",
+								"supabase",
+								"co"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						},
+						"description": "실습용 로그인 엔드포인트입니다.\n\n바디값에 로그인하고자하는 이메일과 비밀번호를 넣고 실행해주세요.\n\npost-script에는 user_id와 access_token을 컬렉션 변수로 저장하는 로직이 포함되어 있습니다."
+					},
+					"response": []
+				}
+			],
+			"description": "## 과제 안내\n\n> 과제는 선택 사항 입니다. 실습용 endpoint를 향후 2주간 추가로 운용할 예정이니 마음껏 테스트해보시고 테스트케이스를 작성해주세요.  \n오늘 collection을 내려받으신 repository로 Pull Request를 날려주시면 시간날때 확인하고 리뷰해드리겠습니다. \n  \n\n### 과제 1: Post 모델 CRUD Collection\n\n- `/posts` CRUD 플로우 작성해보기\n    \n- `/posts`의 spec은 폴더 documetation을 확인해주세요.\n    \n\n### 과제 2: Comment 모델 CRUD Collection\n\n- `/posts/{{postId}}/comments` CRUD 플로우 작성해보기\n    \n- `/comments`의 spec은 폴더 documentation을 확인해주세요."
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "DELETED_ACCESS_TOKEN",
+			"value": ""
+		}
+	]
+}
