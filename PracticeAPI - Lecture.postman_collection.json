@@ -162,6 +162,13 @@
 								"type": "text/javascript",
 								"packages": {}
 							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"packages": {},
+								"type": "text/javascript"
+							}
 						}
 					],
 					"request": {
@@ -185,7 +192,14 @@
 							}
 						],
 						"url": {
-							"raw": "/api/users",
+							"raw": "https://ieyeufrggnhroparziot.functions.supabase.co/api/users",
+							"protocol": "https",
+							"host": [
+								"ieyeufrggnhroparziot",
+								"functions",
+								"supabase",
+								"co"
+							],
 							"path": [
 								"api",
 								"users"
@@ -296,7 +310,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    // TODO: email의 value값에 유저 생성 request에서 collectionsVariable로 사용했던 값을 사용해보세요.\n    \"email\":\"\",\n    \"password\":\"test\"\n}",
+							"raw": "{\n    // TODO: email의 value값에 유저 생성 request에서 collectionsVariable로 사용했던 값을 사용해보세요.\n    \"email\":\"test123@test.com\",\n    \"password\":\"test\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1887,14 +1901,7 @@
 									}
 								],
 								"url": {
-									"raw": "https://ieyeufrggnhroparziot.functions.supabase.co/api/posts",
-									"protocol": "https",
-									"host": [
-										"ieyeufrggnhroparziot",
-										"functions",
-										"supabase",
-										"co"
-									],
+									"raw": "/api/posts",
 									"path": [
 										"api",
 										"posts"
@@ -1904,7 +1911,7 @@
 							"response": []
 						},
 						{
-							"name": "posts/{id}",
+							"name": "posts/{POST_ID}",
 							"request": {
 								"auth": {
 									"type": "bearer",
@@ -1926,18 +1933,11 @@
 									}
 								],
 								"url": {
-									"raw": "https://ieyeufrggnhroparziot.functions.supabase.co/api/posts/6",
-									"protocol": "https",
-									"host": [
-										"ieyeufrggnhroparziot",
-										"functions",
-										"supabase",
-										"co"
-									],
+									"raw": "/api/posts/",
 									"path": [
 										"api",
 										"posts",
-										"6"
+										""
 									]
 								}
 							},
@@ -1997,14 +1997,7 @@
 									}
 								},
 								"url": {
-									"raw": "https://ieyeufrggnhroparziot.functions.supabase.co/api/posts",
-									"protocol": "https",
-									"host": [
-										"ieyeufrggnhroparziot",
-										"functions",
-										"supabase",
-										"co"
-									],
+									"raw": "/api/posts",
 									"path": [
 										"api",
 										"posts"
@@ -2014,7 +2007,7 @@
 							"response": []
 						},
 						{
-							"name": "posts/{id}",
+							"name": "posts/{POST_ID}",
 							"request": {
 								"auth": {
 									"type": "bearer",
@@ -2045,14 +2038,7 @@
 									}
 								},
 								"url": {
-									"raw": "https://ieyeufrggnhroparziot.functions.supabase.co/api/posts/4",
-									"protocol": "https",
-									"host": [
-										"ieyeufrggnhroparziot",
-										"functions",
-										"supabase",
-										"co"
-									],
+									"raw": "/api/posts/4",
 									"path": [
 										"api",
 										"posts",
@@ -2063,7 +2049,7 @@
 							"response": []
 						},
 						{
-							"name": "posts",
+							"name": "posts/{POST_ID}",
 							"request": {
 								"auth": {
 									"type": "bearer",
@@ -2094,25 +2080,18 @@
 									}
 								},
 								"url": {
-									"raw": "https://ieyeufrggnhroparziot.functions.supabase.co/api/posts/2",
-									"protocol": "https",
-									"host": [
-										"ieyeufrggnhroparziot",
-										"functions",
-										"supabase",
-										"co"
-									],
+									"raw": "/api/posts/",
 									"path": [
 										"api",
 										"posts",
-										"2"
+										""
 									]
 								}
 							},
 							"response": []
 						}
 					],
-					"description": "**Post 생성 가능**\n\n- 로그인한 사용자만 생성 가능\n    \n- 액세스 토큰을 헤더에 넣어 request를 실행한다.\n    \n- 생성 시에 body에 \btitle과 body 내용을 입력할 수 있어야한다.\n    \n    - 제목과 본문은 각각 5자 이상 입력해야한다.\n        \n- 생성이 완료되면 포스트 아이디, 제목, 본문, 작성한 유저 아이디를 리턴해야한다.\n    \n\n**Post 조회 가능**\n\n- 누구나 모든 게시글 조회 가능 (공개/ 전체 읽기)\n    \n    - 포스트를 여러개 조회할 때는 포스트 아이디, 포스트를 작성한 유저 아이디, 제목, 코멘트 갯수 를 알 수 있어야한다.\n        \n- 포스트를 단 하나만 조회할 수 도 있다. (공개 / 단일 읽기)\n    \n    - 포스트를 단 하나만 조회할 때는 포스트 아이디, 포스트를 작성한 유저 아이디, 제목, 본문, 코멘트 갯수, 코멘트 내용들을 알 수 있어야한다.\n        \n\n**Post 수정 가능**\n\n- 작성자 본인만 수정 가능\n    \n    - 제목과 본문을 수정할 수 있어야한다.\n        \n    - 수정 시에도 제목과 본문은 각각 5자 이상 입력해야한다.\n        \n- 작성자가 아닌 유저가 수정하려고 하면 수정할 수 없다는 내용을 알 수 있는 값이 리턴되어야한다.\n    \n\n**Post 삭제 가능**\n\n- 작성자 본인만 삭제 가능\n    \n    - 작성자가 아닌 유저가 삭제하려고 하면 삭제할 수 없다는 내용을 알 수 있는 값이 리턴되어야한다.\n        \n- Post를 삭제하면 Post와 연결된 comment들이 자동으로 삭제되어야한다.\n    \n\n---\n\n- **포스트 생성**: POST .../api/posts (token) { title, body }\n    \n- **포스트 목록**: GET .../api/posts\n    \n- **포스트 상세**: GET .../api/posts/{id} (댓글 포함)\n    \n- **포스트 수정**: PATCH .../api/posts/{id} (token)\n    \n- **포스트 삭제**: DELETE .../api/posts/{id} (token)"
+					"description": "**Post 생성 가능**\n\n- 로그인한 사용자만 생성 가능\n    \n- 액세스 토큰을 헤더에 넣어 request를 실행한다.\n    \n- 생성 시에 body에 \btitle과 body 내용을 입력할 수 있어야한다.\n    \n    - 제목과 본문은 각각 5자 이상 입력해야한다.\n        \n- 생성이 완료되면 포스트 아이디, 제목, 본문, 작성한 유저 아이디를 리턴해야한다.\n    \n\n**Post 조회 가능**\n\n- 누구나 모든 게시글 조회 가능 (공개/ 전체 읽기)\n    \n    - 포스트를 여러개 조회할 때는 포스트 아이디, 포스트를 작성한 유저 아이디, 제목, 코멘트 갯수 를 알 수 있어야한다.\n        \n- 포스트를 단 하나만 조회할 수 도 있다. (공개 / 단일 읽기)\n    \n    - 포스트를 단 하나만 조회할 때는 포스트 아이디, 포스트를 작성한 유저 아이디, 제목, 본문, 코멘트 갯수, 코멘트 내용들을 알 수 있어야한다.\n        \n\n**Post 수정 가능**\n\n- 작성자 본인만 수정 가능\n    \n    - 제목과 본문을 수정할 수 있어야한다.\n        \n    - 수정 시에도 제목과 본문은 각각 5자 이상 입력해야한다.\n        \n- 작성자가 아닌 유저가 수정하려고 하면 수정할 수 없다는 내용을 알 수 있는 값이 리턴되어야한다.\n    \n\n**Post 삭제 가능**\n\n- 작성자 본인만 삭제 가능\n    \n    - 작성자가 아닌 유저가 삭제하려고 하면 삭제할 수 없다는 내용을 알 수 있는 값이 리턴되어야한다.\n        \n- Post를 삭제하면 Post와 연결된 comment들이 자동으로 삭제되어야한다.\n    \n\n---\n\n- **포스트 생성**: POST .../api/posts (token) { title, body }\n    \n- **포스트 목록**: GET .../api/posts\n    \n- **포스트 상세**: GET .../api/posts/{\bPOST_ID} (댓글 포함)\n    \n- **포스트 수정**: PATCH .../api/posts/{POST_ID} (token)\n    \n- **포스트 삭제**: DELETE .../api/posts/{POST_ID} (token)"
 				},
 				{
 					"name": "Comment - CRUD",
@@ -2133,14 +2112,7 @@
 									}
 								],
 								"url": {
-									"raw": "https://ieyeufrggnhroparziot.functions.supabase.co/api/comments?post_id=6",
-									"protocol": "https",
-									"host": [
-										"ieyeufrggnhroparziot",
-										"functions",
-										"supabase",
-										"co"
-									],
+									"raw": "/api/comments?post_id=6",
 									"path": [
 										"api",
 										"comments"
@@ -2187,14 +2159,7 @@
 									}
 								},
 								"url": {
-									"raw": "https://ieyeufrggnhroparziot.functions.supabase.co/api/comments",
-									"protocol": "https",
-									"host": [
-										"ieyeufrggnhroparziot",
-										"functions",
-										"supabase",
-										"co"
-									],
+									"raw": "/api/comments",
 									"path": [
 										"api",
 										"comments"
@@ -2211,7 +2176,7 @@
 							"response": []
 						},
 						{
-							"name": "comments",
+							"name": "comments/{COMMENT_ID}}",
 							"request": {
 								"auth": {
 									"type": "bearer",
@@ -2242,18 +2207,11 @@
 									}
 								},
 								"url": {
-									"raw": "https://ieyeufrggnhroparziot.functions.supabase.co/api/comments/3",
-									"protocol": "https",
-									"host": [
-										"ieyeufrggnhroparziot",
-										"functions",
-										"supabase",
-										"co"
-									],
+									"raw": "/api/comments/",
 									"path": [
 										"api",
 										"comments",
-										"3"
+										""
 									],
 									"query": [
 										{
@@ -2267,7 +2225,7 @@
 							"response": []
 						},
 						{
-							"name": "comments",
+							"name": "comments/{COMMENT_ID}",
 							"request": {
 								"auth": {
 									"type": "bearer",
@@ -2289,18 +2247,11 @@
 									}
 								],
 								"url": {
-									"raw": "https://ieyeufrggnhroparziot.functions.supabase.co/api/comments/3",
-									"protocol": "https",
-									"host": [
-										"ieyeufrggnhroparziot",
-										"functions",
-										"supabase",
-										"co"
-									],
+									"raw": "/api/comments/",
 									"path": [
 										"api",
 										"comments",
-										"3"
+										""
 									],
 									"query": [
 										{
@@ -2376,7 +2327,7 @@
 					"response": []
 				}
 			],
-			"description": "## 과제 안내\n\n> 과제는 선택 사항 입니다. 실습용 endpoint를 향후 2주간 추가로 운용할 예정이니 마음껏 테스트해보시고 테스트케이스를 작성해주세요.  \n오늘 collection을 내려받으신 repository로 Pull Request를 날려주시면 시간날때 확인하고 리뷰해드리겠습니다. \n  \n\n### 과제 1: Post 모델 CRUD Collection\n\n- `/posts` CRUD 플로우 작성해보기\n    \n- `/posts`의 spec은 폴더 documetation을 확인해주세요.\n    \n\n### 과제 2: Comment 모델 CRUD Collection\n\n- `/posts/{{postId}}/comments` CRUD 플로우 작성해보기\n    \n- `/comments`의 spec은 폴더 documentation을 확인해주세요."
+			"description": "## 과제 안내\n\n> 과제는 선택 사항 입니다. 실습용 endpoint를 향후 2주간 추가로 운용할 예정이니 마음껏 테스트해보시고 테스트케이스를 작성해주세요.  \n오늘 collection을 내려받으신 repository로 Pull Request를 날려주시면 시간날때 확인하고 리뷰해드리겠습니다. \n  \n\n### 과제 1: Post 모델 CRUD Collection\n\n- `/posts` CRUD 플로우 작성해보기\n    \n- `/posts`의 spec은 폴더 documetation을 확인해주세요.\n    \n\n### 과제 2: Comment 모델 CRUD Collection\n\n- `/comments` CRUD 플로우 작성해보기\n    \n- `/posts` 테스트 시나리오에 포함시켜도 됩니다.\n    \n- `/comments`의 spec은 폴더 documentation을 확인해주세요."
 		}
 	],
 	"event": [
@@ -2404,6 +2355,14 @@
 	"variable": [
 		{
 			"key": "DELETED_ACCESS_TOKEN",
+			"value": ""
+		},
+		{
+			"key": "ACCESS_TOKEN",
+			"value": ""
+		},
+		{
+			"key": "USER_ID",
 			"value": ""
 		}
 	]
