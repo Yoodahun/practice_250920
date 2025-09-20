@@ -1492,14 +1492,7 @@
 									]
 								},
 								"method": "GET",
-								"header": [
-									{
-										"key": "apiKey",
-										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlleWV1ZnJnZ25ocm9wYXJ6aW90Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTUyMjc5NDgsImV4cCI6MjA3MDgwMzk0OH0.NPBvARfsE9Zg9w58eEUKQ5CvAltmB8KLHbwj5WWjea4",
-										"type": "text",
-										"disabled": true
-									}
-								],
+								"header": [],
 								"url": {
 									"raw": "https://ieyeufrggnhroparziot.functions.supabase.co/api/users",
 									"protocol": "https",
