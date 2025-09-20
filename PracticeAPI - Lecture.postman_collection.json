@@ -1400,17 +1400,10 @@
 									"type": "noauth"
 								},
 								"method": "POST",
-								"header": [
-									{
-										"key": "apiKey",
-										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlleWV1ZnJnZ25ocm9wYXJ6aW90Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTUyMjc5NDgsImV4cCI6MjA3MDgwMzk0OH0.NPBvARfsE9Zg9w58eEUKQ5CvAltmB8KLHbwj5WWjea4",
-										"type": "text",
-										"disabled": true
-									}
-								],
+								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"email\":\"{{randomEmail}}\",\n    \"password\":\"test\",\n    \"nickname\":\"test\"\n}",
+									"raw": "{\n    // TODO: 변수 사용하기\n    \"email\":\"\",\n    \"password\":\"test\",\n    \"nickname\":\"test\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1793,7 +1786,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{",
+									"raw": "",
 									"options": {
 										"raw": {
 											"language": "json"
