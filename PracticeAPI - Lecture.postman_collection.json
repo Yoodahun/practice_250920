@@ -1,15 +1,39 @@
 {
 	"info": {
-		"_postman_id": "ddb8492c-ca07-4dfc-b34f-9ea89d6195f1",
+		"_postman_id": "bc8e5a99-52f8-4355-8ece-bc187a9eb164",
 		"name": "PracticeAPI - Lecture",
 		"description": "강의용 request, collection folder들을 모아놓은 collection입니다.\n\n상세내용은 강의자료와 함께 각 폴더, 리퀘스트들의 documentation 내용을 확인해주세요.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "11691534"
+		"_exporter_id": "37175128"
 	},
 	"item": [
 		{
 			"name": "1. GUI and create request",
-			"item": [],
+			"item": [
+				{
+					"name": "Show All Users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://ieyeufrggnhroparziot.functions.supabase.co/api/users",
+							"protocol": "https",
+							"host": [
+								"ieyeufrggnhroparziot",
+								"functions",
+								"supabase",
+								"co"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						},
+						"description": "Generated from cURL: curl --location 'https://ieyeufrggnhroparziot.functions.supabase.co/api/users'\n\n\n\n\n"
+					},
+					"response": []
+				}
+			],
 			"description": "## 간단한 postman GUI 둘러보기\n\n## Collection 생성해보기\n\ncollection은 어떠한 folder 혹은 request들을 모아놓은 상위 folder개념입니다. 컬렉션을 직접 만들어보세요.\n\n## request 생성해보기\n\n1. 폴더 내부에 \"...\" 을 클릭해서 \"add request\" 해보기\n    \n2. 아래 curl을 복사한 다음 import해서 생성해보기\n    \n\n``` shell\ncurl --location 'https://ieyeufrggnhroparziot.functions.supabase.co/api/users'\n\n ```"
 		},
 		{
@@ -22,7 +46,7 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									""
+									"console.log(\"hook post-request\");"
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -32,7 +56,7 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									""
+									"console.log(\"hook pre-request\");"
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -90,7 +114,7 @@
 									"",
 									"// ---- TODO: 전체 데이터가 1개 이상 존재하는지 검증하는 테스트케이스를 작성해보세요.",
 									"// pm.expect(body.length).to.be.greaterThanOrEqual(1);",
-									""
+									"pm.expect(body.length).to.be.greaterThanOrEqual(1);"
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -166,8 +190,11 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"packages": {},
-								"type": "text/javascript"
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -192,13 +219,9 @@
 							}
 						],
 						"url": {
-							"raw": "https://ieyeufrggnhroparziot.functions.supabase.co/api/users",
-							"protocol": "https",
+							"raw": "{{BASE_URL}}/api/users",
 							"host": [
-								"ieyeufrggnhroparziot",
-								"functions",
-								"supabase",
-								"co"
+								"{{BASE_URL}}"
 							],
 							"path": [
 								"api",
@@ -222,9 +245,11 @@
 									"const randomEmail = `test${randomNumber}@test.com`;",
 									"",
 									"// TODO: 컬렉션 변수에 저장",
+									"pm.collectionVariables.set(\"RANDOM_EMAIL\", randomEmail);",
 									"",
 									"// TODO: 설정이 제대로 되었다면 Body 탭의 \"email\" 값의 value를 collectionsVariable값을 가져와 사용해보세요.",
-									""
+									"const random_email = pm.collectionVariables.get(\"RANDOM_EMAIL\");",
+									"console.log(`RANDOM_EMAIL: ${random_email}`);"
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -246,7 +271,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    // Pre-script에서 생성한 이메일 계정을 불러와서 설정해보세요.\n    \"email\": \"\",\n    \"password\":\"test\",\n    \"nickname\":\"test\"\n}",
+							"raw": "{\n    // Pre-script에서 생성한 이메일 계정을 불러와서 설정해보세요.\n    \"email\": \"{{RANDOM_EMAIL}}\",\n    \"password\":\"test\",\n    \"nickname\":\"test\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -254,13 +279,9 @@
 							}
 						},
 						"url": {
-							"raw": "https://ieyeufrggnhroparziot.functions.supabase.co/api/users",
-							"protocol": "https",
+							"raw": "{{BASE_URL}}/api/users",
 							"host": [
-								"ieyeufrggnhroparziot",
-								"functions",
-								"supabase",
-								"co"
+								"{{BASE_URL}}"
 							],
 							"path": [
 								"api",
@@ -281,7 +302,13 @@
 									"",
 									"",
 									"// TODO : 로그인 완료 후의 돌아오는 응답값에서 access_token과 user_id 값을 추출해서 collectionsVariable에 값을 저장해보세요.",
-									"    ",
+									"pm.collectionVariables.set(\"USER_ID\", body.user_id);",
+									"pm.collectionVariables.set(\"ACCESS_TOKEN\", body.access_token);",
+									"",
+									"",
+									"const user_id = pm.collectionVariables.get(\"USER_ID\");",
+									"const access_token = pm.collectionVariables.get(\"ACCESS_TOKEN\");",
+									"console.log(`user_id: ${user_id}, access_token: ${access_token}`);",
 									"///",
 									"",
 									"",
@@ -310,7 +337,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    // TODO: email의 value값에 유저 생성 request에서 collectionsVariable로 사용했던 값을 사용해보세요.\n    \"email\":\"test123@test.com\",\n    \"password\":\"test\"\n}",
+							"raw": "{\n    // TODO: email의 value값에 유저 생성 request에서 collectionsVariable로 사용했던 값을 사용해보세요.\n    \"email\":\"{{RANDOM_EMAIL}}\",\n    \"password\":\"test\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -355,7 +382,9 @@
 											"script": {
 												"exec": [
 													"// TODO: Snippet으로 부터 응답속도 체크를 하는 assertion을 import해보기",
-													"",
+													"pm.test(\"Response time is less than 1000ms\", function () {",
+													"    pm.expect(pm.response.responseTime).to.be.below(1000);",
+													"});",
 													"",
 													"",
 													"// ---- Parse response ----",
@@ -382,14 +411,17 @@
 													"    ",
 													"    // TODO: id가 존재하는지",
 													"    // to.have.property(key값의 이름)",
+													"    pm.expect(body[0]).to.have.property(\"id\");",
 													"    ",
 													"    // TODO: sbody[0].id는 문자열인지",
 													"    // to.be.an(\"string\")",
+													"    pm.expect(body[0].id).to.be.an(\"string\");",
 													"",
 													"    // TODO: email이 존재하는지",
+													"    pm.expect(body[0]).to.have.property(\"email\");",
 													"",
 													"    // TODO: nickname이 존재하는지",
-													"",
+													"    pm.expect(body[0]).to.have.property(\"nickname\");",
 													"});"
 												],
 												"type": "text/javascript",
@@ -442,31 +474,33 @@
 											"script": {
 												"exec": [
 													"body = pm.response.json();",
+													"console.log(body);",
 													"",
 													"pm.test(\"Status code is 201\", function () {",
 													"    // 상태코드가 201인지 확인",
-													"    pm.response.to.have.status();",
-													"    ",
+													"    pm.response.to.have.status(201);",
 													"});",
-													"",
 													"",
 													"",
 													"pm.test(\"계정 생성 성공 확인\", function () {",
 													"    // is_account_created 필드가 존재하는지 확인",
+													"    pm.expect(body).to.have.property(\"is_account_created\");",
 													"",
 													"    // is_account_created 필드가 boolean값인지 확인",
 													"    // to.be.a(\"boolean\")",
+													"    pm.expect(body.is_account_created).to.be.a(\"boolean\");",
 													"",
 													"    // is_account_created 필드가 true인지 확인",
 													"    // to.be.true;",
-													"",
+													"    pm.expect(body.is_account_created).to.be.true;",
 													"",
 													"    // user_id 필드가 존재하는지 확인",
 													"    // to.have.property()",
+													"    pm.expect(body).to.have.property(\"user_id\");",
 													"",
 													"    // user_id 필드가 string 타입인지 확인",
 													"    // to.be.a(\"string\")",
-													" ",
+													"    pm.expect(body.user_id).to.be.a(\"string\");",
 													"});"
 												],
 												"type": "text/javascript",
@@ -477,7 +511,18 @@
 											"listen": "prerequest",
 											"script": {
 												"exec": [
-													""
+													"// 0~9999 사이의 랜덤 숫자 생성",
+													"const randomNumber = Math.floor(Math.random() * 1000000);",
+													"",
+													"// 이메일 주소 생성",
+													"const randomEmail = `test${randomNumber}@test.com`;",
+													"",
+													"// TODO: 컬렉션 변수에 저장",
+													"pm.collectionVariables.set(\"RANDOM_EMAIL\", randomEmail);",
+													"",
+													"// TODO: 설정이 제대로 되었다면 Body 탭의 \"email\" 값의 value를 collectionsVariable값을 가져와 사용해보세요.",
+													"const random_email = pm.collectionVariables.get(\"RANDOM_EMAIL\");",
+													"console.log(`RANDOM_EMAIL: ${random_email}`);"
 												],
 												"type": "text/javascript",
 												"packages": {}
@@ -499,7 +544,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n    \"email\":\"test121@test.com\",\n    \"password\":\"test\",\n    \"nickname\":\"test\"\n}",
+											"raw": "{\n    \"email\":\"{{RANDOM_EMAIL}}\",\n    \"password\":\"test\",\n    \"nickname\":\"test\"\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -540,10 +585,12 @@
 													"pm.test(\"생성하고자 하는 계정이 이미 존재하는 경우의 응답값 확인\", function () {",
 													"    //\"error\" 필드 값이 존재하는지",
 													"    //to.have.property(\"error\")",
+													"    pm.expect(body).to.have.property(\"error\");",
 													"  ",
 													"    // \"error\"의 응답값이 아래 메세지와 동일한지",
 													"    // A user with this email address has already been registered",
 													"    // to.be.equal()",
+													"    pm.expect(body.error).to.be.equal(\"A user with this email address has already been registered\");",
 													"    ",
 													"});"
 												],
@@ -577,7 +624,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n    \"email\":\"test1@test.com\",\n    \"password\":\"test\",\n    \"nickname\":\"test\"\n}",
+											"raw": "{\n    \"email\":\"{{RANDOM_EMAIL}}\",\n    \"password\":\"test\",\n    \"nickname\":\"test\"\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -623,10 +670,10 @@
 													"",
 													"pm.test(\"문자열값이 없는 경우\", function () {",
 													"    // error 필드가 존재하는지",
-													"  ",
+													"    pm.expect(body).to.have.property(\"error\");",
 													"",
-													"    // error 필드의 값은 \"invalid_nickname\" 인지",
-													"    ",
+													"    // error 필드의 값은 \"invalid_nickname\" 인",
+													"    pm.expect(body.error).to.equal(\"invalid_nickname\");",
 													"});"
 												],
 												"type": "text/javascript",
@@ -649,7 +696,7 @@
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n    // TODO: 바디값을 적절히 수정해보세요.\n    // \"nickname\":\n}",
+											"raw": "{\n    // TODO: 바디값을 적절히 수정해보세요.\n    \"nickname\": \"\"\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -686,15 +733,16 @@
 													"",
 													"pm.test(\"Status code is 401\", function () {",
 													"    // 상태코드가 401인 것을 체크할 것.",
+													"    pm.response.to.have.status(401);",
 													"});",
 													"",
 													"",
 													"pm.test(\"존재하지 않는 유저에 대해 닉네임을 변경하려고 하는 경우\", function () {",
 													"    // error 키값이 존재하는지 확인",
-													"  ",
+													"    pm.expect(body.error).to.exist;",
 													"",
 													"    // error 키값의 값이 \"unauthorized\" 인지 확인할 것.",
-													"  ",
+													"    pm.expect(body.error).to.equal(\"unauthorized\");",
 													"});",
 													"",
 													"",
@@ -735,7 +783,7 @@
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n    \"nickname\":\"testtest\"\n}",
+											"raw": "{\n    \"nickname\":\"test\"\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -771,7 +819,7 @@
 													"body = pm.response.json();",
 													"",
 													"pm.test(\"Status code is 400\", function () {",
-													"    pm.response.to.have.status(400);",
+													"    pm.response.to.have.status(200);",
 													"});",
 													"",
 													"",
@@ -843,7 +891,7 @@
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n    // TODO: 바디값을 적절히 수정해보세요.\n    // \"nickname\":\n}",
+											"raw": "{\n    // TODO: 바디값을 적절히 수정해보세요.\n    \"nickname\": \" \"\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -881,19 +929,21 @@
 													"pm.test(\"Status code is 200\", function () {",
 													"    // 상태코드가 200인 것을 확인하기",
 													"    // to.have.status()",
-													"    ",
+													"    pm.response.to.have.status(200);",
 													"});",
 													"",
 													"",
 													"pm.test(\"is_nickname_updated 값이 true인지 확인\", function () {",
 													"    // is_nickname_updated key값이 존재하는지",
 													"    // to.have.property(\"\")",
+													"    pm.expect(body).to.have.property(\"is_nickname_updated\")",
 													"",
 													"    // is_nickname_updated의 값이 boolean인지",
 													"    // to.be.an(\"boolean\")",
+													"    pm.expect(body.is_nickname_updated).to.be.an(\"boolean\")",
 													"",
 													"    // is_nickname_updated 값이 true 인지",
-													"  ",
+													"    pm.expect(body.is_nickname_updated).to.be.true;",
 													"});"
 												],
 												"type": "text/javascript",
@@ -959,7 +1009,7 @@
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n    \"nickname\":\"updated_nickname\"\n}",
+											"raw": "{\n    \"nickname\":\"wooy0ng\"\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -1001,38 +1051,41 @@
 													"body = pm.response.json();",
 													"",
 													"pm.test(\"Status code is 200\", function () {",
-													"    ",
+													"    pm.response.to.have.status(200);",
 													"});",
 													"",
 													"",
 													"pm.test(\"정상적으로 삭제된 경우 - 응답값 구성 확인\", function () {",
 													"    // is_user_deleted 필드가 존재하는지",
+													"    pm.expect(body).to.have.property(\"is_user_deleted\");",
 													"    ",
 													"    // is_user_deleted 필드의 type은 boolean인지",
-													"    ",
+													"    pm.expect(body.is_user_deleted).to.be.a('boolean');",
 													"    ",
 													"    // user 필드가 존재하는지",
+													"    pm.expect(body).to.have.property(\"user\");",
 													"    ",
 													"    // user 필드의 type은 object인지 (밸류값으로 다시 키와 밸류형태로 존재)",
+													"    pm.expect(body.user).to.be.an('object');",
 													"    ",
-													"",
 													"    // user 하위에 id 필드가 존재하는지",
+													"    pm.expect(body.user).to.have.property(\"id\");",
 													"    ",
 													"    // user 하위에 email 필드가 존재하는지",
+													"    pm.expect(body.user).to.have.property(\"email\");",
 													"    ",
 													"    // user 하위에 nickname 필드가 존재하는지",
+													"    pm.expect(body.user).to.have.property(\"nickname\");",
 													"    ",
-													"",
-													"",
 													"});",
 													"",
 													"pm.test(\"삭제 하고자하는 유저와 삭제된 유저의 아이디가 일치하는 지 여부 확인\", function(){",
 													"    // 삭제한 유저의 id값을 collectionVariable로 부터 가져온다.",
-													"    ",
+													"    const user_id = pm.collectionVariables.get(\"USER_ID\");",
 													"",
 													"    // user.id의 값이 collectionVariable로 부터 가져온 값과 일치하는지 ",
 													"    // (즉 토큰발급받을 때의 계정과 삭제한 계정의 id가 일치하는지.)",
-													"    ",
+													"    pm.expect(body.user.id).to.equal(user_id);  // 일치하지 않음",
 													"});",
 													"",
 													"// run은 기본적으로 순차실행입니다.",
@@ -1107,15 +1160,17 @@
 													"",
 													"pm.test(\"Status code is 401\", function () {",
 													"    // 상태코드가 401인 것을 체크할 것.",
+													"    pm.response.to.have.status(401);",
 													"});",
 													"",
 													"",
 													"pm.test(\"존재하지 않는 유저를 삭제하고자하는 경우\", function () {",
 													"    // error 키값이 존재하는지 확인",
+													"    pm.expect(body).to.have.property(\"error\");",
 													"  ",
 													"",
 													"    // error 키값의 값이 \"unauthorized\" 인지 확인할 것.",
-													"  ",
+													"    pm.expect(body.error).to.equal(\"unauthorized\");",
 													"});",
 													"",
 													"",
@@ -1272,65 +1327,6 @@
 									}
 								}
 							]
-						},
-						{
-							"name": "실습용 로그인",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"var jsonData = pm.response.json();",
-											"",
-											"",
-											"pm.test(\"check status code and get access_token\", function () {",
-											"    ",
-											"    pm.response.to.have.status(200);",
-											"",
-											"    pm.collectionVariables.set(\"ACCESS_TOKEN\", jsonData.access_token);",
-											"    pm.collectionVariables.set(\"USER_ID\", jsonData.user_id);",
-											"",
-											"});",
-											""
-										],
-										"type": "text/javascript",
-										"packages": {}
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "noauth"
-								},
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    // 로그인하기 원하는 이메일과 비밀번호를 입력하세요.\n    \"email\":\"test351524@test.com\",\n    \"password\":\"test\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "https://ieyeufrggnhroparziot.functions.supabase.co/api/auth/login",
-									"protocol": "https",
-									"host": [
-										"ieyeufrggnhroparziot",
-										"functions",
-										"supabase",
-										"co"
-									],
-									"path": [
-										"api",
-										"auth",
-										"login"
-									]
-								},
-								"description": "실습용 로그인 엔드포인트입니다.\n\n바디값에 로그인하고자하는 이메일과 비밀번호를 넣고 실행해주세요.\n\npost-script에는 user_id와 access_token을 컬렉션 변수로 저장하는 로직이 포함되어 있습니다."
-							},
-							"response": []
 						}
 					],
 					"description": "`/user` 엔드포인트에 대한 기능테스트 모음 폴더 입니다."
@@ -1354,7 +1350,10 @@
 											"// TODO: 만든 이메일 주소를 컬렉션 변수로 저장. 이름은 편한대로 생성하기.",
 											"// console.log()를 이용해서 한 번 출력해보세요.",
 											"",
-											""
+											"pm.collectionVariables.set(\"RANDOM_EMAIL\", randomEmail);",
+											"",
+											"const random_email = pm.collectionVariables.get(\"RANDOM_EMAIL\");",
+											"console.log(`RANDOM_EMAIL: ${random_email}`);"
 										],
 										"type": "text/javascript",
 										"packages": {}
@@ -1369,25 +1368,32 @@
 											"pm.test(\"Status code is 201\", function () {",
 											"    // 상태코드가 201인지 확인",
 											"    //to.have.status(201);",
+											"    pm.response.to.have.status(201);",
 											"});",
-											"",
 											"",
 											"",
 											"pm.test(\"계정 생성 성공 확인\", function () {",
 											"    // is_account_created 필드가 존재하는지 확인",
+											"    pm.expect(body).to.have.property(\"is_account_created\");",
 											"",
 											"    // is_account_created 필드가 boolean값인지 확인",
 											"    // to.be.a(\"boolean\")",
+											"    pm.expect(body.is_account_created).to.be.a(\"boolean\");",
 											"",
 											"    // is_account_created 필드가 true인지 확인",
+											"    pm.expect(body.is_account_created).to.be.true;",
 											"",
 											"    // user_id 필드가 존재하는지 확인",
+											"    pm.expect(body).to.have.property(\"user_id\");",
 											"",
 											"    // user_id 필드가 string 타입인지 확인",
+											"    pm.expect(body.user_id).to.be.a(\"string\");",
 											"",
 											"    // user_id를 collectionVariable에 저장하기",
+											"    pm.collectionVariables.set(\"USER_ID\", body.user_id);",
 											"    ",
-											" ",
+											"    const user_id = pm.collectionVariables.get(\"USER_ID\");",
+											"    console.log(\"USER_ID: \" + user_id);",
 											"});"
 										],
 										"type": "text/javascript",
@@ -1403,7 +1409,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    // TODO: 변수 사용하기\n    \"email\":\"\",\n    \"password\":\"test\",\n    \"nickname\":\"test\"\n}",
+									"raw": "{\n    // TODO: 변수 사용하기\n    \"email\":\"{{RANDOM_EMAIL}}\",\n    \"password\":\"test\",\n    \"nickname\":\"test\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1444,7 +1450,7 @@
 											"",
 											"pm.test(\"Response is an array\", function () {",
 											"    //to.be.an();",
-											"",
+											"    pm.expect(body).to.be.an(\"array\");",
 											"});",
 											"",
 											"// ---- Find user by id ----",
@@ -1462,15 +1468,19 @@
 											"pm.test(`\"${targetUserId}\" 유저 존재여부 확인`, function () {",
 											"",
 											"    // user 객체타입이 object인지 확인 an(\"object\");",
-											"    ",
+											"    pm.expect(user).to.be.an(\"object\");",
+											"",
 											"    // user 객체가 email key를 가지고 있는지 확인",
+											"    pm.expect(user).to.have.property(\"email\");",
 											"    ",
 											"    // user 객체가 nickname key를 가지고 있는지 확인",
+											"    pm.expect(user).to.have.property(\"nickname\");",
 											"    ",
-											"    // colelctionVariable로 부터 생성했을때 사용한 이메일 값을 가져오기.",
+											"    // collctionVariable로 부터 생성했을때 사용한 이메일 값을 가져오기.",
+											"    var expectedEmail = pm.collectionVariables.get(\"RANDOM_EMAIL\");  ",
 											"    ",
 											"    //email이 신규유저 생성 시에 사용한 email과 동일한지 확인",
-											"    ",
+											"    pm.expect(user.email).to.equal(expectedEmail);",
 											"",
 											"});",
 											""
@@ -1519,7 +1529,7 @@
 										"exec": [
 											"// 로그인 요청 보내기",
 											"",
-											"let user_email = pm.collectionVariables.get(\"randomEmail\");",
+											"let user_email = pm.collectionVariables.get(\"RANDOM_EMAIL\");",
 											"let password = \"test\"",
 											"",
 											"pm.sendRequest({",
@@ -1565,16 +1575,19 @@
 											"pm.test(\"Status code is 200\", function () {",
 											"    // 상태코드가 200인 것을 확인하기",
 											"    // to.have.status()",
-											"    ",
+											"    pm.response.to.have.status(200);",
 											"});",
 											"",
 											"",
 											"pm.test(\"is_nickname_updated 값이 true인지 확인\", function () {",
 											"    // is_nickname_updated key값이 존재하는지",
+											"    pm.expect(body).to.have.property('is_nickname_updated')",
 											"",
 											"    // is_nickname_updated의 값이 boolean인지",
+											"    pm.expect(body.is_nickname_updated).to.be.a('boolean')",
 											"",
 											"    // is_nickname_updated 값이 true 인지",
+											"    pm.expect(body.is_nickname_updated).to.be.true",
 											"  ",
 											"});"
 										],
@@ -1598,7 +1611,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"nickname\":\"dahun_test\"\n}",
+									"raw": "{\n    \"nickname\":\"wooy0ng\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1641,7 +1654,7 @@
 											"",
 											"pm.test(\"Response is an array\", function () {",
 											"    //to.be.an();",
-											"",
+											"    pm.expect(body).to.be.an(\"array\");",
 											"});",
 											"// ---- Find user by id ----",
 											"function findUserById(users, id) {",
@@ -1658,23 +1671,27 @@
 											"pm.test(`\"${targetUserId}\" 유저 존재여부 확인`, function () {",
 											"",
 											"    // user 객체타입이 object인지 확인 an(\"object\");",
-											"    ",
+											"    pm.expect(user).to.be.an(\"object\");",
+											"",
 											"    // user 객체가 email key를 가지고 있는지 확인",
+											"    pm.expect(user).to.have.property(\"email\");",
 											"    ",
 											"    // user 객체가 nickname key를 가지고 있는지 확인",
+											"    pm.expect(user).to.have.property(\"nickname\");",
 											"    ",
 											"",
 											"    // collectionVariable로 부터 이메일값을 가져온다.",
-											"    let user_email = pm.collectionVariables.get(\"randomEmail\");",
-											"    //email이 신규유저 생성 시에 사용한 email과 동일한지 확인",
+											"    let user_email = pm.collectionVariables.get(\"RANDOM_EMAIL\");",
 											"    ",
+											"    //email이 신규유저 생성 시에 사용한 email과 동일한지 확인",
+											"    pm.expect(user.email).to.be.equal(user_email);",
 											"",
 											"});",
 											"",
 											"pm.test(\"변경한 닉네임이 잘 저장되었는지 확인\", function () {",
 											"",
 											"    //변경했던 이메일을과 user.nickname이 일치하는지를 확인",
-											"    ",
+											"    pm.expect(user.nickname).to.be.equal(\"wooy0ng\");",
 											"",
 											"});",
 											""
@@ -1724,38 +1741,41 @@
 											"body = pm.response.json();",
 											"",
 											"pm.test(\"Status code is 200\", function () {",
-											"    ",
+											"    pm.response.to.have.status(200);",
 											"});",
 											"",
 											"",
 											"pm.test(\"정상적으로 삭제된 것을 확인\", function () {",
 											"    // is_user_deleted 필드가 존재하는지",
+											"    pm.expect(body).to.have.property(\"is_user_deleted\");",
 											"    ",
 											"    // is_user_deleted 필드의 type은 boolean인지 a(\"boolean\");",
+											"    pm.expect(body.is_user_deleted).to.be.a(\"boolean\");",
 											"    ",
 											"    // user 필드가 존재하는지",
+											"    pm.expect(body).to.have.property(\"user\");",
 											"    ",
 											"    // user 필드의 type은 object인지 (밸류값으로 다시 키와 밸류형태로 존재) a(\"object\");",
-											"    ",
+											"    pm.expect(body.user).to.be.a(\"object\");",
 											"    ",
 											"    // user 하위에 id 필드가 존재하는지",
+											"    pm.expect(body.user).to.have.property(\"id\");",
 											"    ",
 											"    // user 하위에 email 필드가 존재하는지",
+											"    pm.expect(body.user).to.have.property(\"email\");",
 											"    ",
 											"    // user 하위에 nickname 필드가 존재하는지",
-											"    ",
+											"    pm.expect(body.user).to.have.property(\"nickname\");",
 											"",
 											"});",
 											"",
 											"pm.test(\"삭제 하고자하는 유저와 삭제된 유저의 아이디가 일치하는 지 여부 확인\", function(){",
 											"    // 삭제한 유저의 id값을 collectionVariable로 부터 가져온다.",
-											"    ",
+											"    let userId = pm.collectionVariables.get(\"USER_ID\"); ",
 											"",
 											"    // user.id의 값이 collectionVariable로 부터 가져온 값과 일치하는지 ",
 											"    // (즉 토큰발급받을 때의 계정과 삭제한 계정의 id가 일치하는지.)",
-											"    ",
-											"    ",
-											"    ",
+											"    pm.expect(body.user.id).to.equal(userId);",
 											"});",
 											""
 										],
@@ -1829,8 +1849,7 @@
 											"",
 											"pm.test(`\"${targetUserId}\" 유저가 존재하지 않는 것을 확인`, function () {",
 											"    //null 체크",
-											"    ",
-											"",
+											"    pm.expect(user).to.be.null;",
 											"});",
 											""
 										],
@@ -1881,7 +1900,158 @@
 					"name": "Post - CRUD",
 					"item": [
 						{
+							"name": "Create Users and Login",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"// 0~9999 사이의 랜덤 숫자 생성",
+											"const randomNumber = Math.floor(Math.random() * 1000000);",
+											"",
+											"// 이메일 주소 생성",
+											"const randomEmail = `test${randomNumber}@test.com`;",
+											"pm.collectionVariables.set(\"USER_EMAIL\", randomEmail);",
+											"",
+											"const user_email = pm.collectionVariables.get(\"USER_EMAIL\");",
+											"console.log(`USER_EMAIL: ${user_email}`);",
+											"",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"",
+											"let body = pm.response.json();",
+											"",
+											"pm.test(\"is_account_created is true\", function () {",
+											"    pm.expect(body.is_account_created).to.be.true;",
+											"});",
+											"",
+											"pm.collectionVariables.set(\"USER_ID\", body.user_id);",
+											"",
+											"//////////////////////////////",
+											"// 로그인 진행",
+											"//////////////////////////////",
+											"const user_email = pm.collectionVariables.get(\"USER_EMAIL\");",
+											"const password = \"test\";",
+											"console.log(user_email);",
+											"",
+											"// 로그인 요청 보내기",
+											"pm.sendRequest({",
+											"    url: \"https://ieyeufrggnhroparziot.functions.supabase.co/api/auth/login\",",
+											"    method: \"POST\",",
+											"    header: {",
+											"        \"Content-Type\": \"application/json\"",
+											"    },",
+											"    body: {",
+											"        mode: \"raw\",",
+											"        raw: JSON.stringify({",
+											"            email: user_email,",
+											"            password: password",
+											"        })",
+											"    }",
+											"}, function (err, response) {",
+											"    if (err) {",
+											"        console.log(\"Login error:\", err);",
+											"        return;",
+											"    }",
+											"    ",
+											"    const body = response.json();",
+											"    if (body && body.access_token) {",
+											"        // 환경 변수에 저장",
+											"        pm.collectionVariables.set(\"ACCESS_TOKEN\", body.access_token);",
+											"        pm.collectionVariables.set(\"USER_ID\", body.user_id);",
+											"        console.log(\"accessToken set:\", body.access_token);",
+											"    } else {",
+											"        console.log(\"Login response did not include accessToken:\", body);",
+											"    }",
+											"});",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\":\"{{USER_EMAIL}}\",\n    \"password\":\"test\",\n    \"nickname\":\"wooy0ng\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://ieyeufrggnhroparziot.functions.supabase.co/api/users",
+									"protocol": "https",
+									"host": [
+										"ieyeufrggnhroparziot",
+										"functions",
+										"supabase",
+										"co"
+									],
+									"path": [
+										"api",
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "posts",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Response time is less than 1000ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(1000);",
+											"});",
+											"",
+											"",
+											"let body = pm.response.json();",
+											"",
+											"pm.test(\"body has required fields\", function () {",
+											"    pm.expect(body).to.be.an(\"array\");",
+											"",
+											"    // 필수적인 프로퍼티가 존재하는지 확인한다.",
+											"    pm.expect(body[0]).to.have.property(\"id\");",
+											"    pm.expect(body[0]).to.have.property(\"author_id\");",
+											"    pm.expect(body[0]).to.have.property(\"title\");",
+											"    pm.expect(body[0]).to.have.property(\"comment_count\");",
+											"    pm.expect(body[0]).to.have.property(\"created_at\"); ",
+											"});",
+											"",
+											"// 최근 인입된 id를 POST_ID로 지정한다.",
+											"const post_id = body[0].id;  ",
+											"pm.collectionVariables.set(\"POST_ID\", post_id);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
 							"request": {
 								"auth": {
 									"type": "noauth"
@@ -1896,7 +2066,10 @@
 									}
 								],
 								"url": {
-									"raw": "/api/posts",
+									"raw": "{{BASE_URL}}/api/posts",
+									"host": [
+										"{{BASE_URL}}"
+									],
 									"path": [
 										"api",
 										"posts"
@@ -1907,6 +2080,39 @@
 						},
 						{
 							"name": "posts/{POST_ID}",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"",
+											"let body = pm.response.json();",
+											"",
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"})",
+											"",
+											"pm.test(\"body has required fields\", function () {",
+											"    pm.expect(body).to.be.an(\"object\");",
+											"",
+											"    // 필수적인 프로퍼티가 존재하는지 확인한다.",
+											"    pm.expect(body).to.have.property(\"id\");",
+											"    pm.expect(body).to.have.property(\"author_id\");",
+											"    pm.expect(body).to.have.property(\"title\");",
+											"    pm.expect(body).to.have.property(\"comments\");",
+											"    ",
+											"    pm.expect(body).to.have.property(\"author_id\"); ",
+											"    pm.expect(body).to.have.property(\"created_at\"); ",
+											"    pm.expect(body).to.have.property(\"updated_at\"); ",
+											"    pm.expect(body).to.have.property(\"comment_count\");",
+											"})",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
 							"request": {
 								"auth": {
 									"type": "bearer",
@@ -1928,11 +2134,14 @@
 									}
 								],
 								"url": {
-									"raw": "/api/posts/",
+									"raw": "{{BASE_URL}}/api/posts/{{POST_ID}}",
+									"host": [
+										"{{BASE_URL}}"
+									],
 									"path": [
 										"api",
 										"posts",
-										""
+										"{{POST_ID}}"
 									]
 								}
 							},
@@ -1949,12 +2158,21 @@
 											"",
 											"",
 											"pm.test(\"check status code and post id\", function () {",
-											"    ",
 											"    pm.response.to.have.status(201);",
-											"",
 											"    pm.collectionVariables.set(\"POST_ID\", jsonData.id);",
-											"",
 											"});",
+											"",
+											"",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
 											""
 										],
 										"type": "text/javascript",
@@ -1992,7 +2210,10 @@
 									}
 								},
 								"url": {
-									"raw": "/api/posts",
+									"raw": "{{BASE_URL}}/api/posts",
+									"host": [
+										"{{BASE_URL}}"
+									],
 									"path": [
 										"api",
 										"posts"
@@ -2003,6 +2224,23 @@
 						},
 						{
 							"name": "posts/{POST_ID}",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"",
+											"let body = pm.response.json();",
+											"",
+											"pm.test(\"Check if post is updated\", function () {",
+											"    pm.expect(body.is_post_updated).to.be.true;",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
 							"request": {
 								"auth": {
 									"type": "bearer",
@@ -2025,7 +2263,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"title\": \"test title22\",\n    \"body\":\"test body and check comment\"\n}",
+									"raw": "{\n    \"title\": \"modify title\",\n    \"body\":\"modify body\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -2033,11 +2271,14 @@
 									}
 								},
 								"url": {
-									"raw": "/api/posts/4",
+									"raw": "{{BASE_URL}}/api/posts/{{POST_ID}}",
+									"host": [
+										"{{BASE_URL}}"
+									],
 									"path": [
 										"api",
 										"posts",
-										"4"
+										"{{POST_ID}}"
 									]
 								}
 							},
@@ -2045,6 +2286,22 @@
 						},
 						{
 							"name": "posts/{POST_ID}",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"let body = pm.response.json();",
+											"",
+											"pm.test(\"Post Deleted\", function () {",
+											"    pm.expect(body.is_post_deleted).to.eql(true);",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
 							"request": {
 								"auth": {
 									"type": "bearer",
@@ -2065,21 +2322,15 @@
 										"disabled": true
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"title\": \"test title\",\n    \"body\":\"test body\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
 								"url": {
-									"raw": "/api/posts/",
+									"raw": "{{BASE_URL}}/api/posts/{{POST_ID}}",
+									"host": [
+										"{{BASE_URL}}"
+									],
 									"path": [
 										"api",
 										"posts",
-										""
+										"{{POST_ID}}"
 									]
 								}
 							},
@@ -2092,38 +2343,147 @@
 					"name": "Comment - CRUD",
 					"item": [
 						{
-							"name": "comments?post_id",
-							"request": {
-								"auth": {
-									"type": "noauth"
-								},
-								"method": "GET",
-								"header": [
-									{
-										"key": "apiKey",
-										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlleWV1ZnJnZ25ocm9wYXJ6aW90Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTUyMjc5NDgsImV4cCI6MjA3MDgwMzk0OH0.NPBvARfsE9Zg9w58eEUKQ5CvAltmB8KLHbwj5WWjea4",
-										"type": "text",
-										"disabled": true
+							"name": "Create Users and Login",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"// 0~9999 사이의 랜덤 숫자 생성",
+											"const randomNumber = Math.floor(Math.random() * 1000000);",
+											"",
+											"// 이메일 주소 생성",
+											"const randomEmail = `test${randomNumber}@test.com`;",
+											"pm.collectionVariables.set(\"USER_EMAIL\", randomEmail);",
+											"",
+											"const user_email = pm.collectionVariables.get(\"USER_EMAIL\");",
+											"console.log(`USER_EMAIL: ${user_email}`);",
+											"",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
 									}
-								],
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"",
+											"let body = pm.response.json();",
+											"",
+											"pm.test(\"is_account_created is true\", function () {",
+											"    pm.expect(body.is_account_created).to.be.true;",
+											"});",
+											"",
+											"pm.collectionVariables.set(\"USER_ID\", body.user_id);",
+											"",
+											"//////////////////////////////",
+											"// 로그인 진행",
+											"//////////////////////////////",
+											"const user_email = pm.collectionVariables.get(\"USER_EMAIL\");",
+											"const password = \"test\";",
+											"console.log(user_email);",
+											"",
+											"// 로그인 요청 보내기",
+											"pm.sendRequest({",
+											"    url: \"https://ieyeufrggnhroparziot.functions.supabase.co/api/auth/login\",",
+											"    method: \"POST\",",
+											"    header: {",
+											"        \"Content-Type\": \"application/json\"",
+											"    },",
+											"    body: {",
+											"        mode: \"raw\",",
+											"        raw: JSON.stringify({",
+											"            email: user_email,",
+											"            password: password",
+											"        })",
+											"    }",
+											"}, function (err, response) {",
+											"    if (err) {",
+											"        console.log(\"Login error:\", err);",
+											"        return;",
+											"    }",
+											"    ",
+											"    const body = response.json();",
+											"    if (body && body.access_token) {",
+											"        // 환경 변수에 저장",
+											"        pm.collectionVariables.set(\"ACCESS_TOKEN\", body.access_token);",
+											"        pm.collectionVariables.set(\"USER_ID\", body.user_id);",
+											"        console.log(\"accessToken set:\", body.access_token);",
+											"    } else {",
+											"        console.log(\"Login response did not include accessToken:\", body);",
+											"    }",
+											"});",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\":\"{{USER_EMAIL}}\",\n    \"password\":\"test\",\n    \"nickname\":\"wooy0ng\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
 								"url": {
-									"raw": "/api/comments?post_id=6",
+									"raw": "https://ieyeufrggnhroparziot.functions.supabase.co/api/users",
+									"protocol": "https",
+									"host": [
+										"ieyeufrggnhroparziot",
+										"functions",
+										"supabase",
+										"co"
+									],
 									"path": [
 										"api",
-										"comments"
-									],
-									"query": [
-										{
-											"key": "post_id",
-											"value": "6"
-										}
+										"users"
 									]
 								}
 							},
 							"response": []
 						},
 						{
-							"name": "comments",
+							"name": "Create posts",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();",
+											"",
+											"",
+											"pm.test(\"check status code and post id\", function () {",
+											"    pm.response.to.have.status(201);",
+											"    pm.collectionVariables.set(\"POST_ID\", jsonData.id);",
+											"});",
+											"",
+											"",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
 							"request": {
 								"auth": {
 									"type": "bearer",
@@ -2146,7 +2506,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"post_id\":6,\n    \"body\":\"test comment other user\"\n}",
+									"raw": "{\n    \"title\": \"test title\",\n    \"body\":\"test body\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -2154,7 +2514,54 @@
 									}
 								},
 								"url": {
-									"raw": "/api/comments",
+									"raw": "{{BASE_URL}}/api/posts",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"posts"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create comments",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{ACCESS_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "apiKey",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlleWV1ZnJnZ25ocm9wYXJ6aW90Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTUyMjc5NDgsImV4cCI6MjA3MDgwMzk0OH0.NPBvARfsE9Zg9w58eEUKQ5CvAltmB8KLHbwj5WWjea4",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"post_id\":{{POST_ID}},\n    \"body\":\"test comment other user\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/api/comments",
+									"host": [
+										"{{BASE_URL}}"
+									],
 									"path": [
 										"api",
 										"comments"
@@ -2171,7 +2578,87 @@
 							"response": []
 						},
 						{
+							"name": "comments?post_id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"",
+											"let body = pm.response.json();",
+											"",
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"Response body has required fields\", function () {",
+											"    pm.expect(body[0]).to.have.property('post_id');",
+											"    pm.expect(body[0]).to.have.property('id');",
+											"    pm.expect(body[0]).to.have.property('author_id');",
+											"    pm.expect(body[0]).to.have.property('body');",
+											"    pm.expect(body[0]).to.have.property('created_at');",
+											"});",
+											"",
+											"// set comment id to collection variables",
+											"pm.collectionVariables.set(\"COMMENT_ID\", body[0].id);",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "apiKey",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlleWV1ZnJnZ25ocm9wYXJ6aW90Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTUyMjc5NDgsImV4cCI6MjA3MDgwMzk0OH0.NPBvARfsE9Zg9w58eEUKQ5CvAltmB8KLHbwj5WWjea4",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "{{BASE_URL}}/api/comments?post_id={{POST_ID}}",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"comments"
+									],
+									"query": [
+										{
+											"key": "post_id",
+											"value": "{{POST_ID}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "comments/{COMMENT_ID}}",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"",
+											"let body = pm.response.json();",
+											"",
+											"pm.test(\"Check if comment is updated\", function () {",
+											"    pm.expect(body.is_comment_updated).to.be.true;",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
 							"request": {
 								"auth": {
 									"type": "bearer",
@@ -2202,11 +2689,14 @@
 									}
 								},
 								"url": {
-									"raw": "/api/comments/",
+									"raw": "{{BASE_URL}}/api/comments/{{COMMENT_ID}}",
+									"host": [
+										"{{BASE_URL}}"
+									],
 									"path": [
 										"api",
 										"comments",
-										""
+										"{{COMMENT_ID}}"
 									],
 									"query": [
 										{
@@ -2221,6 +2711,23 @@
 						},
 						{
 							"name": "comments/{COMMENT_ID}",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"",
+											"let body = pm.response.json();",
+											"",
+											"pm.test(\"Comment Deleted\", function () {",
+											"    pm.expect(body.is_comment_deleted).to.be.true;",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
 							"request": {
 								"auth": {
 									"type": "bearer",
@@ -2242,11 +2749,14 @@
 									}
 								],
 								"url": {
-									"raw": "/api/comments/",
+									"raw": "{{BASE_URL}}/api/comments/{{COMMENT_ID}}",
+									"host": [
+										"{{BASE_URL}}"
+									],
 									"path": [
 										"api",
 										"comments",
-										""
+										"{{COMMENT_ID}}"
 									],
 									"query": [
 										{
@@ -2261,65 +2771,6 @@
 						}
 					],
 					"description": "**Comment 생성 가능**\n\n- 로그인한 사용자만 생성 가능\n    \n- comment 생성 시에는 포스트의 아이디(post_id), 코멘트 내용(body)을 입력해야한다.\n    \n    - 생성 완료시에는 코멘트 아이디, 코멘트 작성자 유저 아이디, 코멘트 내용을 리턴해야한다.\n        \n    - comment 생성 시에는 3자 이상 100자 이하 텍스트만 가능해야한다.\n        \n\n**Comment 조회 가능**\n\n- 누구나 모든 댓글 조회 가능 (공개 읽기)\n    \n- 코멘트는 특정 포스트의 코멘트만 조회할 수 있다.\n    \n- 조회 시에는 api의 쿼리파라미터로 조회하고자하는 포스트의 아이디를 넣어야한다.\n    \n- 특정 포스트의 comment 조회시에는 한 번에 여러 comment를 조회할 수 있다.\n    \n    - 포스트 아이디, 코멘트 아이디, 코멘트를 작성한 유저 아이디, 코멘트 내용을 리턴해야한다.\n        \n\n**Comment 수정 가능**\n\n- 작성자 \"본인\" 만 수정 가능\n    \n    - 수정할 때도 3자 이상 100자 이하 텍스트만 가능해야한다.\n        \n- 작성자가 아닌 사람이 수정하려고 하면 수정할 수 없다는 내용을 알 수 있는 값을 리턴해야한다.\n    \n\n**Comment 삭제 가능**\n\n- 작성자 \"본인\" 만 삭제 가능\n    \n    - 작성자가 아닌 사람이 삭제하려고 하면 삭제할 수 없다는 내용을 알 수 있는 값을 리턴해야한다.\n        \n\n---\n\n- **댓글 생성**: POST .../api/comments (token) { post_id :int, body:string }\n    \n- **댓글 조회**: GET .../api/comments?post_id={post_id}\n    \n- **댓글 수정**: PATCH .../api/comments/{comment_id} (token)\n    \n- **댓글 삭제**: DELETE .../api/comments/{comment_id} (token)"
-				},
-				{
-					"name": "/auth/login",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"var jsonData = pm.response.json();",
-									"",
-									"",
-									"pm.test(\"check status code and get access_token\", function () {",
-									"    ",
-									"    pm.response.to.have.status(200);",
-									"",
-									"    pm.collectionVariables.set(\"ACCESS_TOKEN\", jsonData.access_token);",
-									"    pm.collectionVariables.set(\"USER_ID\", jsonData.user_id);",
-									"",
-									"});",
-									""
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						}
-					],
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    // 로그인하기 원하는 이메일과 비밀번호를 입력하세요.\n    \"email\":\"test1@test.com\",\n    \"password\":\"test\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "https://ieyeufrggnhroparziot.functions.supabase.co/api/auth/login",
-							"protocol": "https",
-							"host": [
-								"ieyeufrggnhroparziot",
-								"functions",
-								"supabase",
-								"co"
-							],
-							"path": [
-								"api",
-								"auth",
-								"login"
-							]
-						},
-						"description": "실습용 로그인 엔드포인트입니다.\n\n바디값에 로그인하고자하는 이메일과 비밀번호를 넣고 실행해주세요.\n\npost-script에는 user_id와 access_token을 컬렉션 변수로 저장하는 로직이 포함되어 있습니다."
-					},
-					"response": []
 				}
 			],
 			"description": "## 과제 안내\n\n> 과제는 선택 사항 입니다. 실습용 endpoint를 향후 2주간 추가로 운용할 예정이니 마음껏 테스트해보시고 테스트케이스를 작성해주세요.  \n오늘 collection을 내려받으신 repository로 Pull Request를 날려주시면 시간날때 확인하고 리뷰해드리겠습니다. \n  \n\n### 과제 1: Post 모델 CRUD Collection\n\n- `/posts` CRUD 플로우 작성해보기\n    \n- `/posts`의 spec은 폴더 documetation을 확인해주세요.\n    \n\n### 과제 2: Comment 모델 CRUD Collection\n\n- `/comments` CRUD 플로우 작성해보기\n    \n- `/posts` 테스트 시나리오에 포함시켜도 됩니다.\n    \n- `/comments`의 spec은 폴더 documentation을 확인해주세요."
@@ -2345,20 +2796,6 @@
 					""
 				]
 			}
-		}
-	],
-	"variable": [
-		{
-			"key": "DELETED_ACCESS_TOKEN",
-			"value": ""
-		},
-		{
-			"key": "ACCESS_TOKEN",
-			"value": ""
-		},
-		{
-			"key": "USER_ID",
-			"value": ""
 		}
 	]
 }
